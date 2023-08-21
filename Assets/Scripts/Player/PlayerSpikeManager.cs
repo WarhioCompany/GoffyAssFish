@@ -39,11 +39,6 @@ public class PlayerSpikeManager : MonoBehaviour
             newObject.transform.localScale = prefabSize;
 
             spikeList.Add( newObject );
-
-            //SpriteMask mask = newObject.GetComponent<SpriteMask>();
-            //newObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = i;
-            //mask.frontSortingOrder = i;
-            //mask.backSortingOrder = i;
         }
     }
 }

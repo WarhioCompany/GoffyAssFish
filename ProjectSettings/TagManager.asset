@@ -4,11 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< HEAD
-  - limit
-=======
   - Object
->>>>>>> b7f880d7280eb7fe576a56eae8a13e64bac054bb
   layers:
   - Default
   - TransparentFX
@@ -16,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - 3DLayer
+  - 2DLayer
   - 
   - 
   - 
