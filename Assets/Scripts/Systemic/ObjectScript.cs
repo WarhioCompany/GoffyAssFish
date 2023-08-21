@@ -21,5 +21,10 @@ public class ObjectScript : MonoBehaviour
         {
             disolveTime -= Time.deltaTime;
         }
+        if(disolveTime < 0)
+        {
+            //Destroy object (with animation)?
+            Destroy(gameObject);
+        }
     }
 }
