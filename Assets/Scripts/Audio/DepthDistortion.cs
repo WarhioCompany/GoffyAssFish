@@ -14,11 +14,10 @@ public class DepthDistortion : MonoBehaviour
     private float _effectRatio;
     private float _boostRatio;
 
-    public float TESTHEIGHT;
-
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogWarning("Replace calculations with pre-calculated ratios");
         _effectRatio = (maxEffectValue - minEffectValue) / GameValues.MaxHeight;
         _boostRatio = maxBoostValue / GameValues.MaxHeight;
     }
@@ -26,8 +25,7 @@ public class DepthDistortion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(maxEffectValue - (maxEffectValue - minEffectValue) / GameValues.MaxHeight * TESTHEIGHT);
-        mixer.SetFloat("depthEffect", maxEffectValue - (maxEffectValue - minEffectValue) / GameValues.MaxHeight * TESTHEIGHT); //GameValues.height);
-        mixer.SetFloat("depthVolumeBoost", maxBoostValue / GameValues.MaxHeight * TESTHEIGHT);
+        mixer.SetFloat("depthEffect", maxEffectValue - (maxEffectValue - minEffectValue) / GameValues.MaxHeight * -GameValues.height); 
+        mixer.SetFloat("depthVolumeBoost", maxBoostValue / GameValues.MaxHeight * GameValues.height);
     }
 }
