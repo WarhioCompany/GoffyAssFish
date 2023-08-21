@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private InputAction mousePos;
     public float deadzone;
 
+    [Header("States")]
+    public bool Attached;
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -48,7 +51,15 @@ public class PlayerMovement : MonoBehaviour
     {
         // get direction
 
-        // shoot in this direction, if mouse 
+        // shoot in this direction, if mouse not in deadzone
+        Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
+        mouseWorldPosition.z = 0;
+        if (Vector2.Distance(transform.position, mouseWorldPosition) > deadzone)
+        {
+            
+        }
+
     }
 
     public int GetNearestTentacle()
