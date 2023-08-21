@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Tentacle Things")]
-    public GameObject[] tentacles;
+    public List<GameObject> tentacles;
+    public List<Vector3> tentOrgRot;
 
     private PlayerInputActions playerInput;
     private InputAction mousePos;
@@ -12,17 +14,28 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("States")]
     public bool Attached;
+    public bool prepareing;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, deadzone);
 
-        foreach (var t in tentacles)
+        try
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(t.transform.position, 0.2f);
-        }
+            Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
+            //mouseWorldPosition.z = 0;
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireSphere(mouseWorldPosition, 0.1f);
+        } catch { }
+
+        //foreach (var t in tentacles)
+        //{
+        //    Gizmos.color = Color.yellow;
+        //    Gizmos.DrawWireSphere(t.transform.position, 0.2f);
+        //}
     }
 
     private void OnEnable()
@@ -41,15 +54,59 @@ public class PlayerMovement : MonoBehaviour
         mousePos = playerInput.Player.MousePos;
     }
 
-    private void Update()
+    private void Start()
     {
-        int nearestTentacleIndex = GetNearestTentacle();
-        //Debug.Log("Nearest Tentacle Index: " + nearestTentacleIndex);
+        tentacles = GetComponent<PlayerSpikeManager>().spikeList;
+        foreach (GameObject t in tentacles)
+        {
+            tentOrgRot.Add(t.transform.eulerAngles);
+        }
     }
 
+    private void Update()
+    {
+        if (prepareing)
+        {
+            Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
+            mouseWorldPosition.z = 0;
+
+            int nearestTentacleIndex = GetNearestTentacle();
+            //Debug.Log("Nearest Tentacle Index: " + nearestTentacleIndex);
+
+            for (int i = 0; i < tentacles.Count; i++)
+            {
+                Quaternion targetRotation;
+
+                if (i == nearestTentacleIndex)
+                {
+                    var dir = mouseWorldPosition - transform.position;
+                    var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                    targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                }
+                else
+                {
+                    targetRotation = Quaternion.Euler(tentOrgRot[i]);
+                }
+
+                // Use Lerp or Slerp to smoothly interpolate the rotation
+                float rotationSpeed = 20.0f; // Adjust the rotation speed as needed
+
+                // Slerp towards the target rotation
+                tentacles[i].transform.rotation = Quaternion.Slerp(tentacles[i].transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            }
+        }
+
+    }
+
+
+    public void PrepareShoot()
+    {
+        prepareing = true;
+    }
     public void Shoot()
     {
-        // get direction
+        prepareing = false;
 
         // shoot in this direction, if mouse not in deadzone
         Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
@@ -57,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         mouseWorldPosition.z = 0;
         if (Vector2.Distance(transform.position, mouseWorldPosition) > deadzone)
         {
-            
+            Debug.Log("Shoot!");
         }
 
     }
@@ -73,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log(mouseWorldPosition);
 
-        for (int i = 0; i < tentacles.Length; i++)
+        for (int i = 0; i < tentacles.Count; i++)
         {
             GameObject tentacle = tentacles[i];
             float dist = Vector3.Distance(tentacle.transform.position, mouseWorldPosition);

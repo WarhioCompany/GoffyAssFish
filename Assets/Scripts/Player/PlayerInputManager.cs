@@ -37,6 +37,7 @@ public class KeyInputScript : MonoBehaviour
         {
             // prepare launching
             Debug.Log("Prepare...");
+            GetComponent<PlayerMovement>().PrepareShoot();
         }
         else if (ctx.canceled)
         {
