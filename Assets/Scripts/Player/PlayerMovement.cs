@@ -5,50 +5,162 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Tentacle Things")]
-    public float range;
-    public List<GameObject> tentacles;
-    public List<Vector3> tentOrgRot;
-
-    private PlayerInputActions playerInput;
-    private InputAction mousePos;
-    public float deadzone;
-    private int selected; // selected tentacle for shooting
-    Vector3 targetPos;
-    Vector3 startPos;
-
-    [Header("States")]
-    public bool Attached;
-    public bool prepareing;
-    public bool pending; // pending impact of a spike
-    public bool negativ;
-
-    [Header("Cooldown")]
-    public float cooldown;
-    public float curCooldown;
-
-    private void OnDrawGizmos()
+    public enum SPIKESTATE
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, deadzone);
-
-        try
-        {
-            Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
-            //mouseWorldPosition.z = 0;
-
-            Gizmos.color = Color.black;
-            Gizmos.DrawWireSphere(mouseWorldPosition, 0.1f);
-        } catch { }
-
-        //foreach (var t in tentacles)
-        //{
-        //    Gizmos.color = Color.yellow;
-        //    Gizmos.DrawWireSphere(t.transform.position, 0.2f);
-        //}
+        READY,
+        PREPARE,
+        WAITING,
+        RETRIEVE
+    }
+    public enum PLAYERSTATE
+    {
+        NONE,
+        ATTACHED,
+        STUNNED
     }
 
+    [Header("PlayerState")]
+    public PLAYERSTATE playerState = PLAYERSTATE.NONE;
+
+    [Header("SpikeShoot")]
+    public SPIKESTATE spikeState = SPIKESTATE.READY; // state of cur shot
+    public float deadzone;
+    public bool forceSpikeDissabled;
+    public float range = 0.8f;
+    public float retrieveTime = 0.5f;
+
+    private int curSpike;
+    private Vector3 movePos;
+    private List<GameObject> spikes;
+
+
+    [Header("Countdown")]
+    public float cooldownTime;
+    private float curTimer;
+
+    // Mousepos
+    private PlayerInputActions playerInput;
+    private InputAction mousePos;
+
+    private void Start()
+    {
+        spikes = GetComponent<PlayerSpikeManager>().spikeList;
+    }
+
+    private void Update()
+    {
+        if (curTimer > 0)
+        {
+            curTimer -= Time.fixedDeltaTime;
+            return;
+        }
+
+        int nearest = GetNearestTentacle();
+        if (spikeState == SPIKESTATE.PREPARE)
+        {
+            // tell nearest spike to look at mousepos, any other spike resets
+            for (int i = 0; i < spikes.Count; i++)
+            {
+                if (i == nearest)
+                {
+                    spikes[i].GetComponent<PlayerTentacle>().LookAt(getmousePos());
+                } 
+                else
+                {
+                    spikes[i].GetComponent<PlayerTentacle>().ResetSpike();
+                }
+            }
+        }
+        else if (spikeState == SPIKESTATE.WAITING)
+        {
+            // tell nearest spike to movetowards mousepoint + range and save the spike + movePos
+            spikes[curSpike].GetComponent<PlayerTentacle>().MoveTo(movePos, range);
+            
+        }
+        else if (spikeState == SPIKESTATE.RETRIEVE)
+        {
+            // tell saved spike to reset, delete saved spike and movePos
+            spikes[curSpike].GetComponent<PlayerTentacle>().ResetSpike();
+            movePos = Vector3.zero;
+            curSpike = -1;
+            curTimer = cooldownTime;
+            spikeState = SPIKESTATE.READY;
+        }
+    }
+
+    public void Prepare()
+    {
+        if (canShoot())
+        {
+            spikeState = SPIKESTATE.PREPARE;
+        }
+    }
+
+    public void Shoot()
+    {
+        // initiate the Spike Shoot
+        if (Vector2.Distance(transform.position, getmousePos()) > deadzone)
+        {
+            // not in click deadzone
+            curSpike = GetNearestTentacle();
+            movePos = getmousePos();
+
+            spikeState = SPIKESTATE.WAITING;
+        }
+    }
+
+    public void Attach(GameObject obj)
+    {
+        // attach to a Object (set as Child of Obj)
+        transform.parent = obj.transform;
+    }
+
+    public void Detatch()
+    {
+        // detatch from gameobject (set as Child from nothing)
+        transform.parent = null;
+    }
+
+    public bool canShoot()
+    {
+        if (forceSpikeDissabled) return false;
+        if (spikeState == SPIKESTATE.READY && curTimer <= 0) return true;
+        return false;
+    }
+
+    public Vector3 getmousePos()
+    {
+        Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
+        return mouseWorldPosition;
+    }
+
+    public int GetNearestTentacle()
+    {
+        int shortestIndex = 0;
+        float shortestDist = Mathf.Infinity;
+
+        //Debug.Log(mouseWorldPosition);
+
+        for (int i = 0; i < spikes.Count; i++)
+        {
+            GameObject tentacle = spikes[i];
+            float dist = Vector3.Distance(tentacle.transform.position, getmousePos());
+
+            //Debug.Log("Dist: " + dist);
+
+            if (dist < shortestDist)
+            {
+                //Debug.Log("Dist: " + dist);
+                shortestIndex = i;
+                shortestDist = dist;
+            }
+        }
+
+        return shortestIndex;
+    }
+
+    #region inputaction_setup
     private void OnEnable()
     {
         playerInput.Player.Enable();
@@ -64,132 +176,5 @@ public class PlayerMovement : MonoBehaviour
         playerInput = new PlayerInputActions();
         mousePos = playerInput.Player.MousePos;
     }
-
-    private void Start()
-    {
-        tentacles = GetComponent<PlayerSpikeManager>().spikeList;
-        foreach (GameObject t in tentacles)
-        {
-            tentOrgRot.Add(t.transform.eulerAngles);
-        }
-    }
-
-    private void Update()
-    {
-        if (prepareing)
-        {
-            Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
-            mouseWorldPosition.z = 0;
-
-            int nearestTentacleIndex = GetNearestTentacle();
-            //Debug.Log("Nearest Tentacle Index: " + nearestTentacleIndex);
-
-            for (int i = 0; i < tentacles.Count; i++)
-            {
-                Quaternion targetRotation;
-
-                if (i == nearestTentacleIndex)
-                {
-                    var dir = mouseWorldPosition - transform.position;
-                    var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                    targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                }
-                else
-                {
-                    targetRotation = Quaternion.Euler(tentOrgRot[i]);
-                }
-
-                // Use Lerp or Slerp to smoothly interpolate the rotation
-                float rotationSpeed = 20.0f; // Adjust the rotation speed as needed
-
-                // Slerp towards the target rotation
-                tentacles[i].transform.rotation = Quaternion.Slerp(tentacles[i].transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-            }
-        }
-
-        if (pending)
-        {
-            float moveSpeed = 17.0f;
-            
-            tentacles[selected].transform.GetChild(0).position = Vector3.Lerp(tentacles[selected].transform.GetChild(0).position, targetPos, Time.deltaTime * moveSpeed);
-            if (tentacles[selected].transform.GetChild(0).position == targetPos)
-            {
-                Debug.Log("Ready");
-                pending = false;
-                negativ = true; // when spike doesnt hit
-            }
-        }
-
-        if (negativ)
-        {
-            float moveSpeed = 5.0f;
-
-            tentacles[selected].transform.GetChild(0).position = Vector3.Lerp(tentacles[selected].transform.GetChild(0).position, startPos, Time.deltaTime * moveSpeed);
-        }
-
-    }
-
-
-    public void PrepareShoot()
-    {
-        if (!canShoot()) return;
-        prepareing = true;
-    }
-
-    public void Shoot()
-    {
-        // shoot in this direction, if mouse not in deadzone
-        Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
-        if (Vector2.Distance(transform.position, mouseWorldPosition) > deadzone)
-        {
-            Debug.Log("Shoot!");
-            selected = GetNearestTentacle();
-            targetPos = tentacles[selected].transform.GetChild(0).position + (tentacles[selected].transform.right * range);
-            startPos = tentacles[selected].transform.GetChild(0).position;
-            pending = true;
-        }
-
-    }
-
-    public void PullPlayer()
-    {
-
-    }
-
-    public int GetNearestTentacle()
-    {
-        int shortestIndex = 0;
-        float shortestDist = Mathf.Infinity;
-
-        Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
-        mouseWorldPosition.z = 0;
-
-        //Debug.Log(mouseWorldPosition);
-
-        for (int i = 0; i < tentacles.Count; i++)
-        {
-            GameObject tentacle = tentacles[i];
-            float dist = Vector3.Distance(tentacle.transform.position, mouseWorldPosition);
-
-            //Debug.Log("Dist: " + dist);
-
-            if (dist < shortestDist)
-            {
-                //Debug.Log("Dist: " + dist);
-                shortestIndex = i;
-                shortestDist = dist;
-            }
-        }
-
-        return shortestIndex;
-    }
-
-    public bool canShoot()
-    {
-        if (pending || prepareing || negativ || curCooldown > 0) return false;
-        return true;
-    }
+    #endregion
 }

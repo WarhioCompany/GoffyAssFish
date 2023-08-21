@@ -36,13 +36,13 @@ public class KeyInputScript : MonoBehaviour
         if (ctx.started)
         {
             // prepare launching
-            Debug.Log("Prepare...");
-            GetComponent<PlayerMovement>().PrepareShoot();
+            //Debug.Log("Prepare...");
+            GetComponent<PlayerMovement>().Prepare(); ;
         }
         else if (ctx.canceled)
         {
             // shoot tentacle
-            Debug.Log("Launch...");
+            //Debug.Log("Launch...");
             GetComponent<PlayerMovement>().Shoot();
         }
     }

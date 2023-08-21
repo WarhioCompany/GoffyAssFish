@@ -17,7 +17,7 @@ public class PlayerUpwardForce : MonoBehaviour
     {
         //if (transform.position.y < 0)
             rigidBody.AddForce(Vector2.up * force * rigidBody.gravityScale * Time.deltaTime);
-        if (!movement.Attached)
+        if (!(movement.playerState == PlayerMovement.PLAYERSTATE.ATTACHED))
         {
             rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, maxVelo);
         }
