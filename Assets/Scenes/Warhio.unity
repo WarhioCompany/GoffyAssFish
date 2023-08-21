@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6acfbc0b469200448bbfd82dba6eb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 99a7fee9af906174aac7a601244af5fd, type: 2}
   musicClip: {fileID: 8300000, guid: 81bd07b45213de947b8559be8dcf6b7b, type: 3}
   musicSource: {fileID: 1358964425}
 --- !u!82 &1057599399
