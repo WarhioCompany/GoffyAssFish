@@ -67,6 +67,10 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 002dff2ac8ebd3246918cf4f7517465b
     name: depthEffect
+  - guid: 6c77b2e5f95ee0b4384ba25b94866ee4
+    name: musicVolume
+  - guid: 34d4090d975f67a4a9156c6123bc2564
+    name: soundFXVolume
   - guid: 9bb0f460cbf0f054ab58cbbf71ed2218
     name: depthVolumeBoost
   m_AudioMixerGroupViews:

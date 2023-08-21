@@ -29,9 +29,15 @@ public class SpawnManager : MonoBehaviour
         return Random.Range(-xRange, xRange);
     }
 
+<<<<<<< HEAD
     private float GetRandomZRotation(float range)
     {
         return Random.Range(-range, range);
+=======
+    private Vector3 GetRandomRotation(float range) { 
+        float z = Random.Range(-range, range);
+        return new Vector3(0, 0, z);
+>>>>>>> 6bf57685c3ef647bf57be2de84dfd45058a55c05
     }
 
     private void Spawn()

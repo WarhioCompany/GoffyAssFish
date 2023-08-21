@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHeightTracker : MonoBehaviour
 {
-    public float height;
+    public float heightMeterRatio;
+    private void Update()
+    {
+        GameValues.height = Mathf.Clamp(transform.position.y * heightMeterRatio, 0, GameValues.MaxHeight); 
+    }
 }
