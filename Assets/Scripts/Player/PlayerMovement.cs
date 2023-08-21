@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,16 +6,21 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Tentacle Things")]
+    public float range;
     public List<GameObject> tentacles;
     public List<Vector3> tentOrgRot;
 
     private PlayerInputActions playerInput;
     private InputAction mousePos;
     public float deadzone;
+    private int selected; // selected tentacle for shooting
+    Vector3 targetPos;
 
     [Header("States")]
     public bool Attached;
     public bool prepareing;
+    public bool pending; // pending impact of a spike
+    public bool negativ;
 
     private void OnDrawGizmos()
     {
@@ -97,25 +103,46 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (pending)
+        {
+            float moveSpeed = 17.0f;
+            
+            tentacles[selected].transform.GetChild(0).position = Vector3.Lerp(tentacles[selected].transform.GetChild(0).position, targetPos, Time.deltaTime * moveSpeed);
+            if (tentacles[selected].transform.GetChild(0).position == targetPos)
+            {
+                pending = false;
+            }
+        }
+
     }
 
 
     public void PrepareShoot()
     {
+        if (pending) return;
         prepareing = true;
     }
+
     public void Shoot()
     {
+        if (pending) return;
         prepareing = false;
 
         // shoot in this direction, if mouse not in deadzone
         Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
-        mouseWorldPosition.z = 0;
         if (Vector2.Distance(transform.position, mouseWorldPosition) > deadzone)
         {
             Debug.Log("Shoot!");
+            selected = GetNearestTentacle();
+            targetPos = tentacles[selected].transform.GetChild(0).position + (tentacles[selected].transform.right * range);
+            pending = true;
         }
+
+    }
+
+    public void PullPlayer()
+    {
 
     }
 

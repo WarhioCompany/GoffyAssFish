@@ -20,7 +20,7 @@ public class PlayerTentacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Object") && !isPulling)
+        if (collision.gameObject.CompareTag("Object") && !isPulling && GetComponentInParent<PlayerMovement>().pending)
         {
             try
             {
