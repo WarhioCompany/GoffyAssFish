@@ -8,9 +8,13 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInputActions playerInput;
     private InputAction mousePos;
+    public float deadzone;
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, deadzone);
+
         foreach (var t in tentacles)
         {
             Gizmos.color = Color.yellow;
@@ -42,7 +46,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Shoot()
     {
+        // get direction
 
+        // shoot in this direction, if mouse 
     }
 
     public int GetNearestTentacle()
