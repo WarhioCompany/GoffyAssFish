@@ -15,12 +15,17 @@ public class PlayerMovement : MonoBehaviour
     public float deadzone;
     private int selected; // selected tentacle for shooting
     Vector3 targetPos;
+    Vector3 startPos;
 
     [Header("States")]
     public bool Attached;
     public bool prepareing;
     public bool pending; // pending impact of a spike
     public bool negativ;
+
+    [Header("Cooldown")]
+    public float cooldown;
+    public float curCooldown;
 
     private void OnDrawGizmos()
     {
@@ -110,8 +115,17 @@ public class PlayerMovement : MonoBehaviour
             tentacles[selected].transform.GetChild(0).position = Vector3.Lerp(tentacles[selected].transform.GetChild(0).position, targetPos, Time.deltaTime * moveSpeed);
             if (tentacles[selected].transform.GetChild(0).position == targetPos)
             {
+                Debug.Log("Ready");
                 pending = false;
+                negativ = true; // when spike doesnt hit
             }
+        }
+
+        if (negativ)
+        {
+            float moveSpeed = 5.0f;
+
+            tentacles[selected].transform.GetChild(0).position = Vector3.Lerp(tentacles[selected].transform.GetChild(0).position, startPos, Time.deltaTime * moveSpeed);
         }
 
     }
@@ -119,15 +133,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void PrepareShoot()
     {
-        if (pending) return;
+        if (!canShoot()) return;
         prepareing = true;
     }
 
     public void Shoot()
     {
-        if (pending) return;
-        prepareing = false;
-
         // shoot in this direction, if mouse not in deadzone
         Vector2 mouseScreenPosition = mousePos.ReadValue<Vector2>();
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
@@ -136,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Shoot!");
             selected = GetNearestTentacle();
             targetPos = tentacles[selected].transform.GetChild(0).position + (tentacles[selected].transform.right * range);
+            startPos = tentacles[selected].transform.GetChild(0).position;
             pending = true;
         }
 
@@ -173,5 +185,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return shortestIndex;
+    }
+
+    public bool canShoot()
+    {
+        if (pending || prepareing || negativ || curCooldown > 0) return false;
+        return true;
     }
 }
