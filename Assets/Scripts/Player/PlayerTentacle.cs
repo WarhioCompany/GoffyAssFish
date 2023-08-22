@@ -11,7 +11,7 @@ public class PlayerTentacle : MonoBehaviour
         IDLE,
         LOOKAT,
         MOVETO,
-        RETRIEVE
+        HIT
     }
 
     public spikeState state;
@@ -26,6 +26,9 @@ public class PlayerTentacle : MonoBehaviour
     private Vector3 target;
     public Vector3 targetPos;
 
+    public float timerAmount;
+    public float retrieveTimer = 0;
+
     private void Start()
     {
         spike = transform.GetChild(0).gameObject;
@@ -36,6 +39,14 @@ public class PlayerTentacle : MonoBehaviour
 
     private void Update()
     {
+        if (retrieveTimer > 0)
+        {
+            retrieveTimer -= Time.fixedDeltaTime;
+        } else if (retrieveTimer <= 0 && state == spikeState.MOVETO)
+        {
+            GetComponentInParent<PlayerMovement>().spikeState = PlayerMovement.SPIKESTATE.RETRIEVE;
+        }
+
         if (state == spikeState.LOOKAT)
         {
             // look at the target
@@ -49,7 +60,7 @@ public class PlayerTentacle : MonoBehaviour
             float rotationSpeed = 20.0f; // Adjust the rotation speed as needed
 
             // Slerp towards the target rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             //////////////////////////////////////
         }
         else if (state == spikeState.MOVETO)
@@ -65,7 +76,12 @@ public class PlayerTentacle : MonoBehaviour
             float rotationSpeed = 20.0f; // Adjust the rotation speed as needed
 
             // Slerp towards the target rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+            if (retrieveTimer <= 0)
+            {
+                retrieveTimer = timerAmount;
+            }
             //////////////////////////////////////
 
             //////////////////////////////////////
@@ -73,13 +89,7 @@ public class PlayerTentacle : MonoBehaviour
 
             spike.transform.position = Vector3.Lerp(spike.transform.position, targetPos, Time.deltaTime * moveSpeed);
 
-            Debug.Log("Spike: " + spike.transform.position + "\nShould: " + targetPos);
-
-            if (spike.transform.position.x == targetPos.x && spike.transform.position.y == targetPos.y) 
-            {
-                // reach end and retrieve, bcs nothing hit
-                state = spikeState.RETRIEVE;
-            }
+            //Debug.Log("Spike: " + spike.transform.position + "\nShould: " + targetPos);
             //////////////////////////////////////
         }
         else if (state == spikeState.IDLE)
@@ -93,39 +103,13 @@ public class PlayerTentacle : MonoBehaviour
             float rotationSpeed = 20.0f; // Adjust the rotation speed as needed
 
             // Slerp towards the target rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             //////////////////////////////////////
             
             //////////////////////////////////////
             float moveSpeed = 17.0f;
 
             spike.transform.position = Vector3.Lerp(spike.transform.position, orgPos, Time.deltaTime * moveSpeed);
-            //////////////////////////////////////
-        }
-        else if (state == spikeState.RETRIEVE)
-        {
-            // reset and Idel Anim
-            //////////////////////////////////////
-            Quaternion targetRotation;
-            targetRotation = Quaternion.Euler(orgRot);
-
-            // Use Lerp or Slerp to smoothly interpolate the rotation
-            float rotationSpeed = 20.0f; // Adjust the rotation speed as needed
-
-            // Slerp towards the target rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-            //////////////////////////////////////
-
-            //////////////////////////////////////
-            float moveSpeed = player.GetComponent<PlayerMovement>().retrieveTime;
-
-            spike.transform.position = Vector3.Lerp(spike.transform.position, orgPos, Time.deltaTime * moveSpeed);
-
-            if (spike.transform.position.x == orgPos.x && spike.transform.position.y == orgPos.y)
-            {
-                // reach end and retrieve, bcs nothing hit
-                state = spikeState.IDLE;
-            }
             //////////////////////////////////////
         }
     }
@@ -138,15 +122,17 @@ public class PlayerTentacle : MonoBehaviour
 
     public void MoveTo(Vector3 point, float range)
     {
+        if (state == spikeState.MOVETO) return;
         target = point;
         targetPos = transform.position + (transform.right * range) - (transform.right);
-        targetPos.x = (float)(Math.Truncate(targetPos.x * 100) / 100);
-        targetPos.y = (float)(Math.Truncate(targetPos.y * 100) / 100);
+        //targetPos.x = (float)(Math.Truncate(targetPos.x * 100) / 100);
+        //targetPos.y = (float)(Math.Truncate(targetPos.y * 100) / 100);
         state = spikeState.MOVETO;
     }
 
     public void ResetSpike()
     {
+        if (state == spikeState.IDLE) return;
         target = Vector3.zero; state = spikeState.IDLE;
     }
 
