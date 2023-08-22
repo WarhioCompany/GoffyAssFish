@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -24,7 +25,7 @@ public class PlayerTentacle : MonoBehaviour
 
     [Header("Moving")]
     private Vector3 target;
-    private Vector3 targetPos;
+    public Vector3 targetPos;
 
     private void Start()
     {
@@ -69,11 +70,13 @@ public class PlayerTentacle : MonoBehaviour
             //////////////////////////////////////
 
             //////////////////////////////////////
-            float moveSpeed = 17.0f;
+            float moveSpeed = 20.0f;
 
             spike.transform.position = Vector3.Lerp(spike.transform.position, targetPos, Time.deltaTime * moveSpeed);
 
-            if (spike.transform.position == targetPos)
+            Debug.Log("Spike: " + spike.transform.position + "\nShould: " + targetPos);
+
+            if (spike.transform.position == targetPos) 
             {
                 // reach end and retrieve, bcs nothing hit
                 state = spikeState.IDLE;
@@ -137,8 +140,9 @@ public class PlayerTentacle : MonoBehaviour
     public void MoveTo(Vector3 point, float range)
     {
         target = point;
-        targetPos = orgPos + (transform.right * range);
-        Debug.Log(targetPos);
+        targetPos = transform.position + (transform.right * range) - (transform.right);
+        targetPos.x = (float)(Math.Truncate(targetPos.x * 100) / 100);
+        targetPos.y = (float)(Math.Truncate(targetPos.y * 100) / 100);
         state = spikeState.MOVETO;
     }
 
