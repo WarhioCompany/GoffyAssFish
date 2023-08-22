@@ -11,7 +11,6 @@ public class PlayerTentacle : MonoBehaviour
         IDLE,
         LOOKAT,
         MOVETO,
-        HIT,
         RETRIEVE
     }
 
@@ -76,10 +75,10 @@ public class PlayerTentacle : MonoBehaviour
 
             Debug.Log("Spike: " + spike.transform.position + "\nShould: " + targetPos);
 
-            if (spike.transform.position == targetPos) 
+            if (spike.transform.position.x == targetPos.x && spike.transform.position.y == targetPos.y) 
             {
                 // reach end and retrieve, bcs nothing hit
-                state = spikeState.IDLE;
+                state = spikeState.RETRIEVE;
             }
             //////////////////////////////////////
         }
@@ -122,7 +121,7 @@ public class PlayerTentacle : MonoBehaviour
 
             spike.transform.position = Vector3.Lerp(spike.transform.position, orgPos, Time.deltaTime * moveSpeed);
 
-            if (spike.transform.position == orgPos)
+            if (spike.transform.position.x == orgPos.x && spike.transform.position.y == orgPos.y)
             {
                 // reach end and retrieve, bcs nothing hit
                 state = spikeState.IDLE;
