@@ -8,6 +8,6 @@ public class PlayerHeightTracker : MonoBehaviour
     public float heightMeterRatio;
     private void Update()
     {
-        GameValues.height = Mathf.Clamp(transform.position.y * heightMeterRatio, 0, GameValues.MaxHeight); 
+        GameValues.height = Mathf.Clamp(transform.position.y * heightMeterRatio, -GameValues.MaxHeight, 0); 
     }
 }
