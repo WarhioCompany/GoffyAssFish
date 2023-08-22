@@ -24,6 +24,9 @@ public class EnemyMovement : MonoBehaviour
     public float maxYDist; // gets boost when he is here + teleport 
     public float resetYDist; // boosts get resettet
 
+    [Header("CC")]
+    public float concussedTimer;
+
     private GameObject player;
     private Rigidbody2D rb;
 
@@ -44,6 +47,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        if (concussedTimer > 0)
+        {
+            concussedTimer -= Time.deltaTime;
+            return;
+        }
+
         // keep enemy over player, as long as he is not attacking. Stay still when Attacking
         if (state == enemyState.ATTACK)
         {
@@ -90,6 +99,11 @@ public class EnemyMovement : MonoBehaviour
         {
             rb.drag = 6;
         }
+    }
+
+    public void Concuss()
+    {
+
     }
 
 
