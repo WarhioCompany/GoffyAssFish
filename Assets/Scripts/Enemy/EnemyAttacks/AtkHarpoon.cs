@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class AtkHarpoon : MonoBehaviour
 {
-    // shooting dir = Vector3.right
-    // it spawns at the weapon, it moves forward
-
     public float speed;
     public float acceleration;
 
-    private Rigidbody2D rb;
+    private Rigidbody rb; // Changed to Rigidbody for 3D movement
     private bool hit;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (hit) return;
-        // stick to Object, then destroy after 2sec
-        transform.parent = collision.transform;
-        collision.GetComponent<Rigidbody2D>().AddForceAtPosition(rb.velocity, collision.ClosestPoint(rb.position));
+        if (hit || other.CompareTag("Attack")) return;
+
+        // Stick to object, then destroy after 2 seconds
+        transform.parent = other.transform;
+        other.GetComponent<Rigidbody>().AddForceAtPosition(rb.velocity, other.ClosestPoint(rb.position));
 
         speed = 0;
         Destroy(rb);
@@ -26,21 +24,21 @@ public class AtkHarpoon : MonoBehaviour
 
         hit = true;
 
-        if (collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            // hitted the player
+            // Hit the player
         }
     }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         if (hit) return;
-        if (rb.velocity.x <= speed)
+        if (rb.velocity.magnitude <= speed)
         {
             rb.AddForce(transform.right * acceleration * Time.deltaTime);
         }

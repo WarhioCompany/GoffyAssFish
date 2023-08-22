@@ -12,9 +12,9 @@ public class AtkHook : MonoBehaviour
     private bool waiting = true;
     private float orgHeight;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             // Player on Hook --> pull him up shortly
             Debug.Log("HitByHook");
@@ -49,5 +49,7 @@ public class AtkHook : MonoBehaviour
         waiting = true;
         yield return new WaitForSeconds(waitingTime);
         waiting = false;
+        yield return new WaitForSeconds(waitingTime);
+        Destroy(gameObject);
     }
 }

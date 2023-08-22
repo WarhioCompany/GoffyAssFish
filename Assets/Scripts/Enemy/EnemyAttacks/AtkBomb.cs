@@ -1,46 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class AtkBomb : MonoBehaviour
 {
     // spawn and move towards player in big to small curves
 
-    public Transform player;
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 2f;
-    public float booster = 2;
-    public float curveStrength = 0.2f;
+    public float timerTime;
 
-    private Rigidbody2D rb;
+    [Header("Explosion")]
+    public GameObject explosionParticle;
+    public GameObject dissolveParticle;
+    public float explosionRadius;
+    public float explosionStrenght;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(Countdown());
     }
 
-    private void Update()
+    IEnumerator Countdown()
     {
-        float distance = Vector3.Distance(rb.position, player.position);
-        rotationSpeed = Mathf.Clamp(1 / distance * booster, 5, 15);
+        yield return new WaitForSeconds(timerTime);
 
-        // Calculate direction towards the player
-        Vector2 direction = (player.position - transform.position).normalized;
+        // explode
+        ScreenShakeCam.Instance.ShakeCam(10, 1);
 
-        // Calculate the angle to rotate towards the player
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // Explode Animation (ParticleSystem)
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
 
-        // Rotate the missile towards the player with limited speed
-        float step = rotationSpeed * Time.deltaTime;
-        float newAngle = Mathf.MoveTowardsAngle(rb.rotation, angle, step);
-        rb.rotation = newAngle;
+        // Get all objects in radius
+        Collider[] objs = Physics.OverlapSphere(transform.position, explosionRadius);
 
-        // Move the missile forward
-        rb.velocity = transform.right * moveSpeed;
+        foreach (Collider obj in objs)
+        {
+            if (obj.CompareTag("Attack")) continue;
+            // push Objects away abit
+            obj.GetComponent<Rigidbody>().AddForce((obj.transform.position - transform.position) * explosionStrenght, ForceMode.Impulse);
 
-        // Apply a force to curve the missile's path
-        Vector2 curveForce = -transform.up * curveStrength;
-        rb.AddForce(curveForce, ForceMode2D.Force);
+            // Calculate rotation to make the particle face away from the explosion
+            Quaternion rotation = Quaternion.LookRotation(obj.transform.position - transform.position);
+
+            // spawn ParticleBurst in direction away from explosion
+            Instantiate(dissolveParticle, obj.transform.position, rotation);
+
+            // destroy Prop
+            Destroy(obj, 2);
+        }
+        Destroy(gameObject);
     }
 }

@@ -25,6 +25,7 @@ public class ScreenShakeCam : MonoBehaviour
             timerShake -= Time.deltaTime;
             CinemachineBasicMultiChannelPerlin noise = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             noise.m_AmplitudeGain = Mathf.Lerp(startingIntensity, 0, 1 - (timerShake / timerShakeTotal));
+            noise.m_FrequencyGain = Mathf.Lerp(startingIntensity, 0, 1 - (timerShake / timerShakeTotal));
         }
     }
 

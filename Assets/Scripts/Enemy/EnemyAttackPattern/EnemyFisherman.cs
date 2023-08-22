@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class EnemyFisherman : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // using the Hook
 
-    // Update is called once per frame
-    void Update()
+    public float offset;
+    public Transform spawnHeight;
+    public GameObject hookPrefab;
+
+    private GameObject curAttack;
+
+    private void Update()
     {
-        
+        if (curAttack == null)
+        {
+            curAttack = Instantiate(hookPrefab, new Vector3(Random.Range(spawnHeight.position.x - offset, spawnHeight.position.x + offset), spawnHeight.position.y, 0), hookPrefab.transform.rotation);
+        }
     }
 }

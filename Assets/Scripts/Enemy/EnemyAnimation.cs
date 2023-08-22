@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour
 {
-    // Animate move Left/ Move right depending on velocity
+    // Animate move Left/ Move right depending on velocity (+ tilt)
 }
