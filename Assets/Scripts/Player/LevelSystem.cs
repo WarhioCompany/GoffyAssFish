@@ -26,7 +26,4 @@ public class LevelSystem : MonoBehaviour
     private void OnPlayerOilAbsorb() { 
         LevelUp();
     }
-
-    private void OnPlayerDodgePerfectly() { 
-    }
 }
