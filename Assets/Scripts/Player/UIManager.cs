@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using LevelSystem;
+using TMPro;
+using UnityEngine.InputSystem.Controls;
+
 public class UIManager : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] public Slider ExperienceSlider;
+    [SerializeField] public TMP_Text levelDisplay;
 
     [Header("Settings")]
     [SerializeField] private float UISpeed = 0.3f;
@@ -39,6 +43,7 @@ public class UIManager : MonoBehaviour
     public void OnLevelUp()
     {
         SetSlider(ExperienceSlider, 0, PlayerStats.Instance.MinExpValue, PlayerStats.Instance.MaxExpValue);
+        levelDisplay.text = (GetComponentInParent<PlayerStats>().Level + 1).ToString();
     }
 
     public void UpdateUI() {

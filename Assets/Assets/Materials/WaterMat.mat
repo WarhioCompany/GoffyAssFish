@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _alpha: 0.50001335
+    - _alpha: 0.5
     - _waveHeight: 10
     - _waveSize: 2
     - _waveSpeed: 0.1
