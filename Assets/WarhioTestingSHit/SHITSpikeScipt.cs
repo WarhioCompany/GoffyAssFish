@@ -54,10 +54,14 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         return transform.TransformPoint(spikeTipOffset + transform.GetChild(0).localPosition);
     }
+    Vector3 TargetAngleFix(Vector3 target)
+    {
+        return Vector3.Normalize(target - transform.position) * shootingRange * 5;
+    }   
     public void Shoot(Vector3 mousePos)
     {
         state = SpikeState.Shoot;
-        target = Vector3.Normalize(mousePos) * shootingRange * 5;
+        target = TargetAngleFix(mousePos);
         targetLocalY = spikeStartPos.y + shootingRange;
         manager.state = SHITSpikeManager.SpikeManagerState.Flying;
     }
@@ -75,7 +79,7 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         if (manager.state == SHITSpikeManager.SpikeManagerState.Prepare && manager.closestSpike == this)
         {
-            target = manager.getMousePos();
+            target = TargetAngleFix(manager.getMousePos());
         }
         else if (state == SpikeState.Shoot)
         {
@@ -106,7 +110,6 @@ public class SHITSpikeScipt : MonoBehaviour
         if(Mathf.Abs(transform.GetChild(0).localPosition.y - targetLocalY) < 0.1 && state == SpikeState.Retrieving)
         {
             //Retrieved
-            print("No fucking way");
             state = SpikeState.None;
             manager.state = SHITSpikeManager.SpikeManagerState.None;
             _currentSpikeSpeed = shootingSpeed;
