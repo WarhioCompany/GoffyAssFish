@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Linq;
 using UnityEngine;
 
 public class SHITSpikeScipt : MonoBehaviour
 {
     public Vector3 spikeStartPos;
     public Vector3 spikeTipOffset;
-
+    
     public float rotationSpeed;
     public float shootingSpeed;
+
+    public float hitWait;
+    private float _hitWait;
 
     public float retrieveSpeed;
     public float retrieveRotationSpeed;
@@ -25,6 +29,8 @@ public class SHITSpikeScipt : MonoBehaviour
 
     public Sprite sprite;
 
+    Collider2D hitCollider;
+
     Vector3 target;
     Vector3 initialTipPosition;
 
@@ -35,6 +41,8 @@ public class SHITSpikeScipt : MonoBehaviour
         None, 
         Preparing,
         Shoot,
+        Hit,
+        Attached,
         Retrieving
     }
     public SpikeState state;
@@ -48,6 +56,7 @@ public class SHITSpikeScipt : MonoBehaviour
         targetLocalY = spikeStartPos.y;
         _currentSpikeSpeed = shootingSpeed;
         _currentSpikeRotationSpeed = rotationSpeed;
+        _hitWait = hitWait;
     }
 
     public Vector3 GetTipPosition()
@@ -74,6 +83,22 @@ public class SHITSpikeScipt : MonoBehaviour
         state = SpikeState.Retrieving;
         manager.state = SHITSpikeManager.SpikeManagerState.Retrieving;
     }
+    Vector2 getContactPosition (Collider2D collision)
+    {
+        return collision.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
+    }
+    float CalculateLocalYByContactPoint(Vector2 contactPoint)
+    {
+        return Vector2.Distance(transform.position, contactPoint) + spikeStartPos.y - 2;
+    }
+    public void Hit(Collider2D hit)
+    {
+        if (state != SpikeState.Shoot) return;
+        hitCollider = hit;
+        state = SpikeState.Hit;
+        manager.attachedSpike = this;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -88,6 +113,27 @@ public class SHITSpikeScipt : MonoBehaviour
             {
                 //Miss
                 Retrieve();
+            }
+        }
+        else if (state == SpikeState.Hit && manager.attachedSpike == this)
+        {
+            Vector2 contactPosition = getContactPosition(hitCollider);
+            targetLocalY = CalculateLocalYByContactPoint(contactPosition);
+            target = TargetAngleFix(contactPosition);
+            if (_hitWait <= 0)
+            {
+                Vector2 dif = Vector3.Normalize(transform.parent.position - (Vector3)contactPosition) * manager.attachRadius;
+                transform.parent.position = Vector3.Lerp(transform.parent.position, contactPosition + dif, manager.playerPullSpeed * Time.deltaTime);
+                if (Vector3.Distance(transform.parent.position, contactPosition + dif) < .3)
+                {
+                    state = SpikeState.Attached;
+                    transform.parent.SetParent(hitCollider.transform);
+                    manager.state = SHITSpikeManager.SpikeManagerState.None;
+                }
+            }
+            else
+            {
+                _hitWait -= Time.deltaTime;
             }
         }
         else 

@@ -8,14 +8,17 @@ public class SHITSpikeManager : MonoBehaviour
 {
     public GameObject spikePrefab;
     public int spikeAmount;
+    public float attachRadius;
     public float radius;
     public float deadRange;
     public List<SHITSpikeScipt> spikeList;
 
+    public float playerPullSpeed;
+
     public SpikeManagerState state = SpikeManagerState.None;
 
     public SHITSpikeScipt closestSpike;
-
+    public SHITSpikeScipt attachedSpike;
  
 
     public enum SpikeManagerState
@@ -45,7 +48,7 @@ public class SHITSpikeManager : MonoBehaviour
         for (int i = 0; i < spikeAmount; i++)
         {
             float dist = Vector3.Distance(spikeList[i].GetTipPosition(), getMousePos());
-            if (dist < minDist)
+            if (dist < minDist && spikeList[i] != attachedSpike)
             {
                 spikeIndex = i;
                 minDist = dist; 
@@ -78,6 +81,7 @@ public class SHITSpikeManager : MonoBehaviour
     }
     public void Prepare()
     {
+        attachedSpike = null;
         if (state == SpikeManagerState.None)
             state = SpikeManagerState.Prepare;
     }
