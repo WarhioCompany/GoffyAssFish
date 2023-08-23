@@ -36,14 +36,12 @@ public class KeyInputScript : MonoBehaviour
         if (ctx.started)
         {
             // prepare launching
-            Debug.Log("Prepare...");
-            GetComponent<PlayerMovement>().PrepareShoot();
+            GetComponent<SHITSpikeManager>().Prepare();
         }
         else if (ctx.canceled)
         {
             // shoot tentacle
-            Debug.Log("Launch...");
-            GetComponent<PlayerMovement>().Shoot();
+            GetComponent<SHITSpikeManager>().Shoot();
         }
     }
 }

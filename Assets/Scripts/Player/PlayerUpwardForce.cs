@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class PlayerUpwardForce : MonoBehaviour
 {
-    private Rigidbody2D rigidBody;
-    public float force;
+    public float acceleration;
     public float maxVelo;
-    private PlayerMovement movement;
+    public float waterHeight;
+
+    private SHITSpikeManager movement;
+    private Rigidbody rigidBody;
+
     private void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        movement = GetComponent<PlayerMovement>();
+        rigidBody = GetComponent<Rigidbody>();
+        movement = GetComponent<SHITSpikeManager>();
     }
     private void Update()
     {
-        //if (transform.position.y < 0)
-            rigidBody.AddForce(Vector2.up * force * rigidBody.gravityScale * Time.deltaTime);
-        if (!movement.Attached)
+        // Up if: Not attached and maxVel not reached;
+        if (rigidBody.velocity.magnitude <= maxVelo && transform.position.y < waterHeight /*&& !movement.attached*/)
         {
-            rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, maxVelo);
+            rigidBody.drag = 0;
+            rigidBody.AddForce(Vector2.up * acceleration * Time.deltaTime);
         }
-        else
+        else if (transform.position.y >= waterHeight)
         {
-            rigidBody.velocity = Vector2.zero;
-        }   
+            rigidBody.drag = 1;
+            rigidBody.AddForce(Vector2.down * acceleration * Time.deltaTime);
+        }
+        //else if (movement.attached)
+        //{
+        //    rigidBody.velocity = Vector3.zero;
+        //}
     }
 }

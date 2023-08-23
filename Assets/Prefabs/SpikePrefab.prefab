@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2324341925755048410}
   - component: {fileID: 6436581257426809650}
   - component: {fileID: 2674540420447942968}
+  - component: {fileID: 5455118759039285891}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.16, y: -0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9138811143940096053}
@@ -114,12 +115,24 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 11.530103, y: 0.14538807}
   serializedVersion: 2
   m_Radius: 0.2431648
+--- !u!114 &5455118759039285891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483986630297754295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00361551b954d5f4abffe97037fb4df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7472660428585563162
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +162,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.046141747, w: 0.9989349}
   m_LocalPosition: {x: 1.37, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2324341925755048410}
@@ -230,5 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80214c0ab09e5324f8ee6600eb2b1dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 0}
-  obj: {fileID: 0}
+  state: 0
+  targetPos: {x: 0, y: 0, z: 0}
+  timerAmount: 100
+  retrieveTimer: 0

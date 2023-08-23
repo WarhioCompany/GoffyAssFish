@@ -3,12 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< HEAD
-  tags: []
-=======
   tags:
   - Object
->>>>>>> 6bf57685c3ef647bf57be2de84dfd45058a55c05
+  - Attack
+  - limit
+  - enemySpawn
   layers:
   - Default
   - TransparentFX
