@@ -28,14 +28,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216786878014331646}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.42668998, w: 0.90439796}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 10.5, y: 3.9, z: 0}
   m_LocalScale: {x: 1, y: 0.21155, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8498672642095964643}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50.515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &1943454427721646410
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   explosionParticle: {fileID: 5324606412232914221, guid: ff274774fec7a054b9767fc95e3fd9ae, type: 3}
   dissolveParticle: {fileID: 1995685473530940286, guid: 3a0772edbef2ab741a91e78d8c716e30, type: 3}
   explosionRadius: 4
-  explosionStrength: 0
+  explosionStrength: 1
 --- !u!54 &3934001051511025300
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!136 &7735007159298603687
 CapsuleCollider:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1555638009675290348}
   m_Layer: 0
   m_Name: EnemyManager
-  m_TagString: Untagged
+  m_TagString: enemyManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6780d6c2008e83244b442dbbbb4bd003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
   firstEnemy: {fileID: 0}
+  curEnemy: {fileID: 0}
   EnemySpawn: {fileID: 0}
   enemyPrefabs:
   - {fileID: 5308717426295006869, guid: 169b5c7dde53e06499a7f8efd40e79cf, type: 3}

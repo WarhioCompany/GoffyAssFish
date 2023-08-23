@@ -20,7 +20,7 @@ public class EnemyFisherman : MonoBehaviour
 
     private void Update()
     {
-        if (curAttack == null)
+        if (curAttack == null && GetComponent<EnemyMovement>().active)
         {
             curAttack = Instantiate(hookPrefab, new Vector3(Random.Range(spawnHeight.position.x - offset, spawnHeight.position.x + offset), spawnHeight.position.y, 0), hookPrefab.transform.rotation);
         }

@@ -14,20 +14,69 @@ public class EnemyBoat : MonoBehaviour
 
     [Header("Shooting Values")]
     public GameObject harpoonPrefab;
+    public float aimTime;
+    public float aimTimeOffset;
+    private float curAimTimer;
+    private bool aiming;
 
     [Header("Harpoon objects")]
     public Transform shootingPoint;
     public GameObject harpoonWeapon;
 
     public float fireRate;
+    private float curTimer;
+    private Transform target;
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     private void Update()
     {
-        
+        if (!GetComponent<EnemyMovement>().active) return;
+        if (curTimer > 0)
+        {
+            curTimer -= Time.deltaTime;
+        }
+        else if (curTimer <= 0 && canShoot())
+        {
+            // set aimtimer, when up: shoot
+            if (!aiming)
+            {
+                aiming = true;
+                curAimTimer = Random.Range(aimTime - aimTimeOffset, aimTime + aimTimeOffset);
+            }
+            if (aiming && curAimTimer > 0)
+            {
+                curAimTimer -= Time.deltaTime;
+
+                Vector3 directionToTarget = target.position - harpoonWeapon.transform.position;
+                float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+                harpoonWeapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else if (curAimTimer <= 0)
+            {
+                aiming = false;
+                Shoot();
+            }
+        }
     }
 
-    public void canShoot()
+    public void Shoot()
+    {
+        // instanciate harpoon prefab
+        Instantiate(harpoonPrefab, shootingPoint.transform.position, shootingPoint.transform.rotation);
+        curTimer = fireRate;
+    }
+
+    public bool canShoot()
     {
         // if: not cc`d, cooldown up (firerate)
+        if (GetComponent<EnemyMovement>().concussedTimer <= 0 && GetComponent<EnemyMovement>().active)
+        {
+            return true;
+        }
+        return false;
     }
 }

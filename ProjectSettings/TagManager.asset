@@ -9,6 +9,7 @@ TagManager:
   - limit
   - enemySpawn
   - enemyManager
+  - enemy
   layers:
   - Default
   - TransparentFX

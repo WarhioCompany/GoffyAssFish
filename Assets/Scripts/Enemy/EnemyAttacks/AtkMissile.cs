@@ -19,6 +19,8 @@ public class AtkMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("enemy")) return;
+
         ScreenShakeCam.Instance.ShakeCam(15, 1.5f);
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
 
@@ -45,6 +47,7 @@ public class AtkMissile : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()

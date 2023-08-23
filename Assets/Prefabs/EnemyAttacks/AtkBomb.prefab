@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d78e60cfba5ea94989ab4d0704f225b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerTime: 0
+  timerTime: 8
   explosionParticle: {fileID: 5324606412232914221, guid: ff274774fec7a054b9767fc95e3fd9ae, type: 3}
   dissolveParticle: {fileID: 1995685473530940286, guid: 3a0772edbef2ab741a91e78d8c716e30, type: 3}
   explosionRadius: 4
@@ -130,7 +130,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!136 &4663236128550333335
 CapsuleCollider:

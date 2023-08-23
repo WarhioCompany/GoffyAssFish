@@ -12,7 +12,7 @@ public class AtkHarpoon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hit || other.CompareTag("Attack")) return;
+        if (hit || other.CompareTag("Attack") || other.CompareTag("enemy")) return;
 
         // Stick to object, then destroy after 2 seconds
         transform.parent = other.transform;

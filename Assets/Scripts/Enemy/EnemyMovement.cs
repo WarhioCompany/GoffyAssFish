@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
         ATTACK
     }
 
+    public bool active = true;
     public enemyState state;
 
     [Header("Movement")]
@@ -47,6 +48,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!active) return;
+
         if (concussedTimer > 0)
         {
             concussedTimer -= Time.deltaTime;
