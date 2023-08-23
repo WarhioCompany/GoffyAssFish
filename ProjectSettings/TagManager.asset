@@ -8,6 +8,7 @@ TagManager:
   - Attack
   - limit
   - enemySpawn
+  - enemyManager
   layers:
   - Default
   - TransparentFX

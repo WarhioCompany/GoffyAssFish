@@ -6,9 +6,11 @@ public class EnemyManager : MonoBehaviour
 {
     // Spawning Enemy, telling Enemy to retreat, depending on height 
 
+    public bool activated;
+
     public GameObject firstEnemy; // preplace enemy (Angel guy: Always there)
     private int curEnemIdx = -1; // current enemy
-    private GameObject curEnemy;
+    [HideInInspector] public GameObject curEnemy;
 
     [Header("Enemy Spawn")]
     public Transform EnemySpawn;
@@ -23,6 +25,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        if (!activated) { return; }
         //Debug.Log(GameValues.height + " / " + -enemyChangeHeight[curEnemIdx + 1]);
         if (GameValues.height < -enemyChangeHeight[curEnemIdx + 1]) 
         {

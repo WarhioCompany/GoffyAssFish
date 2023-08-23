@@ -10,6 +10,7 @@ public class ObjectScript : MonoBehaviour
     public float mass;
     public float gravity;
     public float baseMass = 1;
+    public float massMultiplier;
 
     public bool isPlayerAttached;
 
