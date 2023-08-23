@@ -101,11 +101,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolveParticles: {fileID: 6378933836667488784}
   finalDissolvePrefab: {fileID: 3274723342876711547, guid: e6aba71a4639d9045b75f25902d46a21, type: 3}
-  disolveTime: 0
+  disolveTime: 30
   mass: 0
+  baseMass: 1
   isPlayerAttached: 0
-  minScale: 0
-  maxScale: 0
+  minScale: 0.7
+  maxScale: 2
 --- !u!54 &9181894981494721327
 Rigidbody:
   m_ObjectHideFlags: 0
