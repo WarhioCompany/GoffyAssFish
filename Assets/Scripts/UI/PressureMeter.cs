@@ -5,6 +5,8 @@ using UnityEngine;
 public class PressureMeter : MonoBehaviour
 {
     public GameObject arrow;
+    public float offset;
+    public float totalMaxRotation;
 
     private float maxPressure = 117.33f;
     private float rotationSpeed = 10f;
@@ -13,10 +15,10 @@ public class PressureMeter : MonoBehaviour
     private void Update()
     {
         float percent = getCurBars() / maxPressure;
-        float angle = 180 * percent;
+        float angle = totalMaxRotation * percent;
 
         // Calculate the target rotation
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle+offset);
 
         // Apply random wiggle rotation
         Quaternion wiggleRotation = Quaternion.Euler(0, 0, Random.Range(-maxWiggleAngle, maxWiggleAngle));

@@ -2,12 +2,21 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    private Transform cam;
+
     [Header("General Settings")]
     [SerializeField] private float SpawnMinTime;
     [SerializeField] private float SpawnMaxTime;
-    [SerializeField] private float XRange;
-    [SerializeField] private string LimitlineTag;
+    [SerializeField] private float xOffset;
     [SerializeField] private GameObject[] Objects;
+
+    [Header("Light Items")]
+    [SerializeField] private Transform l_spawnHeight;
+    [SerializeField] private float l_maxWeight;
+
+
+    [Header("Heavy Items")]
+    [SerializeField] private Transform h_spawnHeight;
 
     // Not-serialized
     private float cooldownTimer = 0.0f;
@@ -40,9 +49,9 @@ public class SpawnManager : MonoBehaviour
         if (prefab != null)
         {
             GameObject _object = Instantiate(prefab);
-            SpawnedObject spawned = _object.AddComponent<SpawnedObject>();
-            spawned.LimitlineTag = LimitlineTag;
-            _object.transform.position = new Vector3(GetRandomXPos(XRange), Camera.main.transform.position.y);
+
+            ObjectScript spawned = _object.GetComponent<ObjectScript>();
+            _object.transform.position = new Vector3(GetRandomXPos(xOffset), spawned.mass >= l_maxWeight ? h_spawnHeight.position.y : l_spawnHeight.position.y);
             _object.transform.eulerAngles += new Vector3(0, 0, GetRandomZRotation(RotationRange));
         }
     }
@@ -54,6 +63,12 @@ public class SpawnManager : MonoBehaviour
             Spawn();
             cooldownTimer = Time.time + GetRandomDelay(SpawnMinTime, SpawnMaxTime);
         }
+    }
+
+    private void Start()
+    {
+        xOffset = GameValues.worldXOffset;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     private void Update()

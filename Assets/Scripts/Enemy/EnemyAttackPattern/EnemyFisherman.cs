@@ -7,10 +7,16 @@ public class EnemyFisherman : MonoBehaviour
     // using the Hook
 
     public float offset;
-    public Transform spawnHeight;
     public GameObject hookPrefab;
 
     private GameObject curAttack;
+    private Transform spawnHeight;
+
+    private void Start()
+    {
+        offset = GameValues.worldXOffset;
+        spawnHeight = GameObject.FindGameObjectWithTag("enemySpawn").transform;
+    }
 
     private void Update()
     {

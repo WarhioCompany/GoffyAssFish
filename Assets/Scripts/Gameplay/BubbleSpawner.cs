@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BubbleSpawner : MonoBehaviour
 {
+    public Transform mainCam;
+
     [Header("Spawner Settings")]
     [SerializeField] private GameObject Prefab; // Bubble prefab
 
@@ -29,13 +31,30 @@ public class BubbleSpawner : MonoBehaviour
     // Static Constructor
     public static BubbleSpawner Instance;
 
+    private void OnDrawGizmos()
+    {
+        Vector3 posa = transform.position;
+        posa.x += XRange;
+        posa.y = mainCam.position.y - ShiftHeight;
+        posa.z = 0;
+
+        Vector3 posb = transform.position;
+        posb.x -= XRange;
+        posb.y = mainCam.position.y - ShiftHeight;
+        posb.z = 0;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(posa, posb);
+    }
+
     private void Awake()
     {
         Instance = this;
+        XRange = GameValues.worldXOffset;
     }
 
     private Vector3 GetBubblePos(float xRange) {
-        float _height = Camera.main.transform.position.y - ShiftHeight;
+        float _height = mainCam.position.y - ShiftHeight;
         float randomXPos = Random.Range(-xRange, xRange);
         return new Vector3(randomXPos, _height, 0);
     }
