@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 595670098943377132}
   - component: {fileID: 3031135929312132727}
   - component: {fileID: 5198861141789069499}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AtkHarpoon
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -163,6 +163,14 @@ PrefabInstance:
     - target: {fileID: 37465261955614682, guid: ff533bb11be708a48afb01a85137c477, type: 3}
       propertyPath: m_Name
       value: bubbleTrailMedium
+      objectReference: {fileID: 0}
+    - target: {fileID: 37465261955614682, guid: ff533bb11be708a48afb01a85137c477, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 431046873486995434, guid: ff533bb11be708a48afb01a85137c477, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1160302159192364604, guid: ff533bb11be708a48afb01a85137c477, type: 3}
       propertyPath: playOnAwake

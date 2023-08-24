@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5483513452276704036}
   - component: {fileID: 7125888801684422439}
   - component: {fileID: 1363269524989001834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AtkHook
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5217949573194122000}
   - component: {fileID: 1324370192724331346}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hookString
   m_TagString: Untagged
   m_Icon: {fileID: 0}
