@@ -89,7 +89,7 @@ public class ObjectScript : MonoBehaviour
 
         // set mass
         mass = baseMass * newScale;
-        GetComponent<Rigidbody>().mass = mass;
+        GetComponent<Rigidbody>().mass = mass * massMultiplier;
 
         orgScale = retVal;
         return retVal;

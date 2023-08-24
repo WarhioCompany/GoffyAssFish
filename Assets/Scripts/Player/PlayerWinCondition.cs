@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerWinCondition : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class PlayerWinCondition : MonoBehaviour
     public void Win()
     {
         BlackFadeScript.instance.FadeIn();
+    }
+    public IEnumerator WinInner()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(2);
     }
     public void Lose(float curHeight)
     {

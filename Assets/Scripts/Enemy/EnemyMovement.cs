@@ -28,6 +28,10 @@ public class EnemyMovement : MonoBehaviour
     [Header("CC")]
     public float concussedTimer;
 
+    [Header("Dead Settings")]
+    public float destroyTime;
+    public GameObject destroyEffect;
+
     private GameObject player;
     private Rigidbody rb; // Changed to Rigidbody for 3D movement
 
@@ -110,6 +114,7 @@ public class EnemyMovement : MonoBehaviour
     public void PleaseDie()
     {
         // The enemy implodes and dies
-        Destroy(gameObject);
+        Destroy(Instantiate(destroyEffect, transform.position, Quaternion.identity), 5);
+        Destroy(gameObject, destroyTime);
     }
 }

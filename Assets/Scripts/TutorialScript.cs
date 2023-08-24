@@ -57,13 +57,12 @@ public class TutorialScript : MonoBehaviour
 
     private void Start()
     {
+        if (skip) ResetChanges();
         ShowNextText();
     }
 
     private void Update()
     {
-        if (skip) ResetChanges();
-
         switch (state)
         {
             case tutorialState.INTRODUCTION:
@@ -130,9 +129,10 @@ public class TutorialScript : MonoBehaviour
                     readyForAction = false;
                     waitForAttach = false;
                     waitForMouseClick = false;
-                    state = tutorialState.PUSH;
                     canClick = false;
                     curTextIdx = 0;
+                    state = tutorialState.PUSH;
+                    Time.timeScale = 0;
                 }
 
                 if (Input.GetMouseButtonUp(0) && readyForAction)

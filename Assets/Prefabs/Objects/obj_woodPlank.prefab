@@ -103,8 +103,9 @@ MonoBehaviour:
   finalDissolvePrefab: {fileID: 3274723342876711547, guid: e6aba71a4639d9045b75f25902d46a21, type: 3}
   disolveTime: 30
   mass: 0
-  gravity: 150
+  gravity: 100
   baseMass: 1
+  massMultiplier: 3
   isPlayerAttached: 0
   minScale: 0.7
   maxScale: 2
