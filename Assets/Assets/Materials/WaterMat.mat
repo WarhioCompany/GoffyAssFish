@@ -25,13 +25,16 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _FoamCutOff: 0.5
+    - _FoamSpeed: 0.1
     - _QueueControl: 0
     - _alpha: 0.5
-    - _waveHeight: 10
-    - _waveSize: 2
-    - _waveSpeed: 0.1
+    - _waveHeight: 2
+    - _waveSize: 1
+    - _waveSpeed: 0.15
     - _waveStrenght: 1000
-    m_Colors: []
+    m_Colors:
+    - _FoamColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &672281481851219485
 MonoBehaviour:

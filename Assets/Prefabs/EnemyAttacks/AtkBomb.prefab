@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 426955397998723116}
   - component: {fileID: 3540353972331460838}
   - component: {fileID: 4663236128550333335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AtkBomb
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bubbleTrailStrong
       objectReference: {fileID: 0}
+    - target: {fileID: 1031306048198226009, guid: 6318f02e894c7ef40bc3d828728fb005, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1669895479672150747, guid: 6318f02e894c7ef40bc3d828728fb005, type: 3}
       propertyPath: playOnAwake
       value: 1
@@ -214,6 +218,10 @@ PrefabInstance:
     - target: {fileID: 3460732123483811838, guid: 6318f02e894c7ef40bc3d828728fb005, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281920852923337741, guid: 6318f02e894c7ef40bc3d828728fb005, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -23,6 +23,7 @@ public class EnemyBoat : MonoBehaviour
     public Transform shootingPoint;
     public GameObject harpoonWeapon;
 
+    public LayerMask waterLayer;
     public float fireRate;
     private float curTimer;
     private Transform target;
@@ -35,6 +36,7 @@ public class EnemyBoat : MonoBehaviour
     private void Update()
     {
         if (!GetComponent<EnemyMovement>().active) return;
+
         if (curTimer > 0)
         {
             curTimer -= Time.deltaTime;
@@ -59,6 +61,19 @@ public class EnemyBoat : MonoBehaviour
             {
                 aiming = false;
                 Shoot();
+            }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        RaycastHit[] col = Physics.RaycastAll(new Vector3(transform.position.x, transform.position.y + 100, transform.position.z), Vector3.down);
+        foreach (RaycastHit hit in col)
+        {
+            if (hit.collider.gameObject.layer == waterLayer)
+            {
+                Debug.Log("Found Water");
+                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
             }
         }
     }

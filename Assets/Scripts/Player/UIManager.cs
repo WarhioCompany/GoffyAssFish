@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float UISpeed = 0.3f;
 
+    public Animator uiAnim;
+
     // Static constructor
     public static UIManager Instance;
 
@@ -25,6 +27,8 @@ public class UIManager : MonoBehaviour
     {
         SetSlider(ExperienceSlider, 0, PlayerStats.Instance.MinExpValue, PlayerStats.Instance.MaxExpValue);
     }
+
+    #region experienceSlider
 
     // ~ Utilites for easy workflow
     public void UpdateSlider(Slider _slider, float target, float _speed) { 
@@ -53,6 +57,8 @@ public class UIManager : MonoBehaviour
             UpdateSlider(ExperienceSlider, PlayerStats.Instance.ExperiencePoints, UISpeed);
 
     }
+
+    #endregion
 
     public void Update(){
         UpdateUI(); 
