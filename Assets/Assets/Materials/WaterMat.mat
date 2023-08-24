@@ -28,7 +28,7 @@ Material:
     - _FoamCutOff: 0.5
     - _FoamSpeed: 0.1
     - _QueueControl: 0
-    - _alpha: 0.50043344
+    - _alpha: 0.5
     - _waveHeight: 2
     - _waveSize: 1
     - _waveSpeed: 0.15
