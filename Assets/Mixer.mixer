@@ -65,6 +65,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: bbf78c35c0b62704ca124e91a814c98e
+    name: masterVolume
   - guid: 002dff2ac8ebd3246918cf4f7517465b
     name: depthEffect
   - guid: 6c77b2e5f95ee0b4384ba25b94866ee4
@@ -99,7 +101,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24400004}
   - {fileID: 5234471994385408146}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 6
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

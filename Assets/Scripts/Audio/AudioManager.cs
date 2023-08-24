@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
-using Unity.VisualScripting;
+using UnityEngine.UI;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -35,8 +36,29 @@ public class AudioManager : MonoBehaviour
         mixer.SetFloat("musicVolume", volume);
     }
 
+    public void setMasterVolume(float volume) {
+        mixer.SetFloat("masterVolume", volume);
+    }
+
     public void setSoundEffectsVolume(float volume)
     {
         mixer.SetFloat("soundFXVolume", volume);
     }
+
+    #region KakashiOverload
+
+    public void setMasterVolume(Slider _slider){
+        mixer.SetFloat("masterVolume", _slider.value);
+    }
+
+    public void setMusicVolume(Slider _slider) {
+        mixer.SetFloat("musicVolume", _slider.value);
+
+    }
+
+    public void setSoundEffectsVolume(Slider _slider){
+        mixer.SetFloat("soundFXVolume", _slider.value);
+    }
+
+    #endregion
 }
