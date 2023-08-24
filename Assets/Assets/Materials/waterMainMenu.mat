@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterMat
+  m_Name: waterMainMenu
   m_Shader: {fileID: -6465566751694194690, guid: e30b7cec696d95043b1a5230da0ba6da, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: e30b7cec696d95043b1a5230da0ba6da, type: 3}
   m_ModifiedSerializedProperties: 2
@@ -25,16 +25,19 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _FoamCutOff: 0.5
-    - _FoamSpeed: 0.1
+    - _FoamCutOff: 0.2
+    - _FoamScale: 2000
+    - _FoamSpeed: 0.05
     - _QueueControl: 0
-    - _alpha: 0.50043344
+    - _alpha: 0.5
+    - _foamAmount: 4
     - _waveHeight: 2
     - _waveSize: 1
     - _waveSpeed: 0.15
     - _waveStrenght: 1000
     m_Colors:
     - _FoamColor: {r: 0, g: 0, b: 0, a: 1}
+    - _baseColor: {r: 0.28439835, g: 0.7113463, b: 0.7264151, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &672281481851219485
 MonoBehaviour:

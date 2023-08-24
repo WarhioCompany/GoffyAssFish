@@ -456,7 +456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61460989}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eb8b48e2930fa040b9aee6846b54ca5, type: 3}
   m_Name: 
@@ -5749,7 +5749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85e9713adfbe2b43853fc9887a16a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skip: 1
+  skip: 0
   maxTutorialHeight: -24
   blackBox: {fileID: 435388389}
   clickIndocator: {fileID: 313559832}
