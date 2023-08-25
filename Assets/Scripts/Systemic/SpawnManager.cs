@@ -54,6 +54,16 @@ public class SpawnManager : MonoBehaviour
             _object.transform.position = new Vector3(GetRandomXPos(xOffset), spawned.mass >= l_maxWeight ? h_spawnHeight.position.y : l_spawnHeight.position.y);
             _object.transform.eulerAngles += new Vector3(0, 0, GetRandomZRotation(RotationRange));
         }
+
+        prefab = GetRandomPrefab(Objects);
+        if (prefab != null)
+        {
+            GameObject _object = Instantiate(prefab);
+
+            ObjectScript spawned = _object.GetComponent<ObjectScript>();
+            _object.transform.position = new Vector3(GetRandomXPos(xOffset), spawned.mass >= l_maxWeight ? h_spawnHeight.position.y : l_spawnHeight.position.y);
+            _object.transform.eulerAngles += new Vector3(0, 0, GetRandomZRotation(RotationRange));
+        }
     }
 
     private void TrySpawn()
