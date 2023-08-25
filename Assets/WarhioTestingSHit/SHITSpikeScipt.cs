@@ -29,7 +29,7 @@ public class SHITSpikeScipt : MonoBehaviour
 
     public Sprite sprite;
 
-    Collider2D hitCollider;
+    Collider hitCollider;
 
     Vector3 target;
     Vector3 initialTipPosition;
@@ -94,16 +94,16 @@ public class SHITSpikeScipt : MonoBehaviour
         targetLocalY = spikeStartPos.y;
         state = SpikeState.Retrieving;
     }
-    Vector2 getContactPosition (Collider2D collision)
+    Vector2 getContactPosition (Collider collision)
     {
-        marker.transform.position = collision.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
-        return collision.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
+        marker.transform.position = collision.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
+        return collision.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
     }
     float CalculateLocalYByContactPoint(Vector2 contactPoint)
     {
         return Vector2.Distance(transform.position, contactPoint) + spikeStartPos.y - 2;
     }
-    public void Hit(Collider2D hit)
+    public void Hit(Collider hit)
     {
         if (state != SpikeState.Shoot) return;
         print("hit confirmed");
