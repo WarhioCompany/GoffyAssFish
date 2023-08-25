@@ -155,6 +155,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: die
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: grab
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5560582222651950967}
   m_Solo: 0

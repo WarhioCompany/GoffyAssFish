@@ -19,10 +19,11 @@ public class AtkMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("enemy")) return;
+        if (other.CompareTag("enemy") || other.CompareTag("Attack")) return;
 
         ScreenShakeCam.Instance.ShakeCam(15, 1.5f);
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        SoundManager.instance.playOneShot("explosion");
 
         Collider[] objs = Physics.OverlapSphere(transform.position, explosionRadius);
 
@@ -36,9 +37,13 @@ public class AtkMissile : MonoBehaviour
                 objRb.AddExplosionForce(explosionStrength, transform.position, explosionRadius);
             }
 
-            Quaternion rotation = Quaternion.LookRotation(obj.transform.position - transform.position);
-            Instantiate(dissolveParticle, obj.transform.position, rotation);
-            Destroy(obj.gameObject, 2);
+
+            if (obj.CompareTag("Object"))
+            {
+                Quaternion rotation = Quaternion.LookRotation(obj.transform.position - transform.position);
+                Instantiate(dissolveParticle, obj.transform.position, rotation);
+                Destroy(obj.gameObject, 2);
+            }
         }
 
         Destroy(gameObject);

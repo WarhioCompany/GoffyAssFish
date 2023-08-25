@@ -61,6 +61,11 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    public void UIFadeIn()
+    {
+        uiAnim.SetBool("active", true);
+    }
+
     public void RetryBtn()
     {
         SceneManager.LoadScene(0);

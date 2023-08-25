@@ -230,7 +230,9 @@ public class TutorialScript : MonoBehaviour
 
     public void ResetChanges()
     {
+        textBubble.gameObject.SetActive(false);
         GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<UIManager>().UIFadeIn();
 
         // reset time
         Time.timeScale = 1;

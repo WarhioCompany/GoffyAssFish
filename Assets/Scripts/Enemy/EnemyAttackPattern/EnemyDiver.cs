@@ -47,17 +47,19 @@ public class EnemyDiver : MonoBehaviour
                 aiming = true;
                 curAimTimer = Random.Range(aimTime - aimTimeOffset, aimTime + aimTimeOffset);
             }
-            if (aiming && curAimTimer > 0)
+
+            Vector3 directionToTarget = target.position - harpoonWeapon.transform.position;
+            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+            harpoonWeapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            if (curAimTimer > 0)
             {
                 curAimTimer -= Time.deltaTime;
-
-                Vector3 directionToTarget = target.position - harpoonWeapon.transform.position;
-                float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-                harpoonWeapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             }
             else if (curAimTimer <= 0)
             {
                 aiming = false;
+                GetComponentInChildren<diverAudio>().ShootHarpoon();
                 Shoot();
             }
         }
