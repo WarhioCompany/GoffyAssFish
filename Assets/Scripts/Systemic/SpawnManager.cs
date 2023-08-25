@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
             GameObject _object = Instantiate(prefab);
 
             ObjectScript spawned = _object.GetComponent<ObjectScript>();
-            _object.transform.position = new Vector3(GetRandomXPos(xOffset), spawned.mass >= l_maxWeight ? h_spawnHeight.position.y : l_spawnHeight.position.y);
+            _object.transform.position = new Vector3(GetRandomXPos(xOffset), h_spawnHeight.position.y);
             _object.transform.eulerAngles += new Vector3(0, 0, GetRandomZRotation(RotationRange));
         }
 
@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
             GameObject _object = Instantiate(prefab);
 
             ObjectScript spawned = _object.GetComponent<ObjectScript>();
-            _object.transform.position = new Vector3(GetRandomXPos(xOffset), spawned.mass >= l_maxWeight ? h_spawnHeight.position.y : l_spawnHeight.position.y);
+            _object.transform.position = new Vector3(GetRandomXPos(xOffset), l_spawnHeight.position.y);
             _object.transform.eulerAngles += new Vector3(0, 0, GetRandomZRotation(RotationRange));
         }
     }

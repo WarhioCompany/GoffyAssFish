@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6518974111053309596}
   - component: {fileID: 3324003320618129872}
   - component: {fileID: 4551109882984182572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: obj_weirdshit
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -169,6 +169,10 @@ PrefabInstance:
     - target: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
       propertyPath: m_Name
       value: Disolving
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7861323808068831271, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
       propertyPath: m_LocalPosition.x

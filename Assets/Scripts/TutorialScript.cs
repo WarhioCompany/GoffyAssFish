@@ -57,7 +57,10 @@ public class TutorialScript : MonoBehaviour
 
     private void Start()
     {
-        if (skip) ResetChanges();
+        if (skip) {
+            ResetChanges();
+            return;
+        } 
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = false;
         ShowNextText();
@@ -227,6 +230,8 @@ public class TutorialScript : MonoBehaviour
 
     public void ResetChanges()
     {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = true;
+
         // reset time
         Time.timeScale = 1;
 

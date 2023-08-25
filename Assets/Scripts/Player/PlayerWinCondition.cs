@@ -44,6 +44,8 @@ public class PlayerWinCondition : MonoBehaviour
     }
     public void Lose(float curHeight)
     {
+        GetComponent<Animator>().SetBool("die", true);
+
         BlackFadeScript.instance.FadeIn();
         LoseScreen.GetComponent<Animator>().SetBool("fadeIn", true);
         heightDisp.text = "You got: " + GameValues.height.ToString() + "m";

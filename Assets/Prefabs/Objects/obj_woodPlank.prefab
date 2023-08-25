@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7786185249547637709}
   - component: {fileID: 9181894981494721327}
   - component: {fileID: 2039051768639140024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: obj_woodPlank
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -168,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
       propertyPath: m_Name
       value: Disolving
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7861323808068831271, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
       propertyPath: m_LocalPosition.x

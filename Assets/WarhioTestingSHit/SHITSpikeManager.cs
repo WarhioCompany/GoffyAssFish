@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 public class SHITSpikeManager : MonoBehaviour
 {
@@ -22,8 +23,10 @@ public class SHITSpikeManager : MonoBehaviour
     public SHITSpikeScipt attachedSpike;
 
     public Camera cam;
+    public LayerMask mousePosLayer;
+    public GameObject follow;
 
-    [HideInInspector] public bool canShoot;
+    public bool canShoot;
  
 
     public enum SpikeManagerState
@@ -33,6 +36,12 @@ public class SHITSpikeManager : MonoBehaviour
         Shoot,
         Flying,
         Retrieving
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(getMousePos(), 0.1f);
     }
 
     private void Awake()
@@ -48,8 +57,19 @@ public class SHITSpikeManager : MonoBehaviour
     public Vector3 getMousePos()
     {
         Vector3 screenPoint = Input.mousePosition;
-        screenPoint.z = 10.0f; 
-        return cam.ScreenToWorldPoint(screenPoint);
+        screenPoint.z = 30.0f;
+        screenPoint = cam.ScreenToWorldPoint(screenPoint);
+        return screenPoint;
+
+        //Vector3 pos = Vector3.zero;
+        //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        //if (Physics.Raycast(ray, out RaycastHit hit))
+        //{
+        //    pos = hit.point;
+        //    pos.z = 0;
+        //}
+        //return pos;
+
     }
     public int getClosestSpike()
     {
@@ -92,6 +112,7 @@ public class SHITSpikeManager : MonoBehaviour
     public void Prepare()
     {
         if (!canShoot) return;
+        Debug.Log("Shoot!");
         if (state == SpikeManagerState.None)
             state = SpikeManagerState.Prepare;
     }
@@ -99,12 +120,18 @@ public class SHITSpikeManager : MonoBehaviour
     {
         if (!canShoot) return;
         if (state == SpikeManagerState.Prepare)
+        {
             state = SpikeManagerState.Shoot;
+            GetComponent<Animator>().SetBool("grab", true);
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        if(state == SpikeManagerState.Prepare)
+        transform.rotation = Quaternion.identity;
+        follow.transform.position = getMousePos();
+
+        if (state == SpikeManagerState.Prepare)
         {
             if (Vector3.Distance(getMousePos(), transform.position) < deadRange)
             {

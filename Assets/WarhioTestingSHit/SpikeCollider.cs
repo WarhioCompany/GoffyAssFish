@@ -6,7 +6,7 @@ public class SpikeCollider : MonoBehaviour
 {
     private void OnTriggerStay(Collider collision)
     {
-        print("onStay");
+        //print("onStay");
         GetComponentInParent<SHITSpikeScipt>().Hit(collision);
     }
     private void OnTriggerEnter(Collider collision)
