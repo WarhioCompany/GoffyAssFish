@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,9 @@ public class PlayerWinCondition : MonoBehaviour
     // Win: get to the -maxHeight * meterHeightRatio y position --> Fade to blackscreen --> load Scene: Credits
 
     // Lose: get over the curEnemys Position --> Fade to Blackscreen with LOSE Msg and Retry Btn --> load scene: Main menu
+
+    public GameObject LoseScreen;
+    public TMP_Text heightDisp;
 
     private void Update()
     {
@@ -41,5 +45,7 @@ public class PlayerWinCondition : MonoBehaviour
     public void Lose(float curHeight)
     {
         BlackFadeScript.instance.FadeIn();
+        LoseScreen.GetComponent<Animator>().SetBool("fadeIn", true);
+        heightDisp.text = "You got: " + GameValues.height.ToString() + "m";
     }
 }

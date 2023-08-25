@@ -19,7 +19,7 @@ public class PlayerUpwardForce : MonoBehaviour
     private void Update()
     {
         // Up if: Not attached and maxVel not reached;
-        if (rigidBody.velocity.magnitude <= maxVelo && transform.position.y < waterHeight /*&& !movement.attached*/)
+        if (rigidBody.velocity.magnitude <= maxVelo && transform.position.y < waterHeight && movement.attachedSpike == null)
         {
             rigidBody.drag = 0;
             rigidBody.AddForce(Vector2.up * acceleration * Time.deltaTime);

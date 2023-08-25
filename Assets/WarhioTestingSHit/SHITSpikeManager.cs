@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,10 @@ public class SHITSpikeManager : MonoBehaviour
 
     public SHITSpikeScipt closestSpike;
     public SHITSpikeScipt attachedSpike;
+
+    public Camera cam;
+
+    [HideInInspector] public bool canShoot;
  
 
     public enum SpikeManagerState
@@ -30,6 +35,11 @@ public class SHITSpikeManager : MonoBehaviour
         Retrieving
     }
 
+    private void Awake()
+    {
+        canShoot = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +49,7 @@ public class SHITSpikeManager : MonoBehaviour
     {
         Vector3 screenPoint = Input.mousePosition;
         screenPoint.z = 10.0f; 
-        return Camera.main.ScreenToWorldPoint(screenPoint);
+        return cam.ScreenToWorldPoint(screenPoint);
     }
     public int getClosestSpike()
     {
@@ -81,12 +91,13 @@ public class SHITSpikeManager : MonoBehaviour
     }
     public void Prepare()
     {
-        
+        if (!canShoot) return;
         if (state == SpikeManagerState.None)
             state = SpikeManagerState.Prepare;
     }
     public void Shoot()
     {
+        if (!canShoot) return;
         if (state == SpikeManagerState.Prepare)
             state = SpikeManagerState.Shoot;
     }
@@ -121,6 +132,15 @@ public class SHITSpikeManager : MonoBehaviour
                 print(getClosestSpike());
             }
             state = SpikeManagerState.Flying;
+        }
+
+        if (attachedSpike != null)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 }
