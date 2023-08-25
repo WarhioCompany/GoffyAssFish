@@ -36,6 +36,8 @@ public class SHITSpikeScipt : MonoBehaviour
 
     float targetLocalY;
 
+    GameObject marker;
+
     public enum SpikeState
     {
         None, 
@@ -50,6 +52,11 @@ public class SHITSpikeScipt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        marker = Instantiate(new GameObject());
+        marker.AddComponent<SpriteRenderer>().sprite = sprite;
+        marker.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+
         initialTipPosition = GetTipPosition();
         initialRotation = transform.localRotation.eulerAngles.z;
         transform.GetChild(0).transform.localPosition = spikeStartPos;
@@ -67,8 +74,13 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         return Vector3.Normalize(target - transform.position) * shootingRange * 5;
     }   
-    public void Shoot(Vector3 mousePos)
+    public void Shoot(Vector3 mousePos, Transform attachedObject)
     {
+        if (attachedObject != null)
+        {
+            //TODO: apply reverse force to the object
+        }
+
         state = SpikeState.Shoot;
         target = TargetAngleFix(mousePos);
         targetLocalY = spikeStartPos.y + shootingRange;
@@ -81,10 +93,10 @@ public class SHITSpikeScipt : MonoBehaviour
         target = initialTipPosition;
         targetLocalY = spikeStartPos.y;
         state = SpikeState.Retrieving;
-        manager.state = SHITSpikeManager.SpikeManagerState.Retrieving;
     }
     Vector2 getContactPosition (Collider2D collision)
     {
+        marker.transform.position = collision.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
         return collision.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
     }
     float CalculateLocalYByContactPoint(Vector2 contactPoint)
@@ -94,11 +106,15 @@ public class SHITSpikeScipt : MonoBehaviour
     public void Hit(Collider2D hit)
     {
         if (state != SpikeState.Shoot) return;
+        print("hit confirmed");
         hitCollider = hit;
         state = SpikeState.Hit;
         manager.attachedSpike = this;
     }
-
+    public void Detach()
+    {
+        Retrieve();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -136,6 +152,12 @@ public class SHITSpikeScipt : MonoBehaviour
                 _hitWait -= Time.deltaTime;
             }
         }
+        else if (state == SpikeState.Attached)
+        {
+            Vector2 contactPosition = getContactPosition(hitCollider);
+            targetLocalY = CalculateLocalYByContactPoint(contactPosition);
+            target = TargetAngleFix(contactPosition);
+        }
         else 
         {
             target = initialTipPosition;
@@ -146,6 +168,8 @@ public class SHITSpikeScipt : MonoBehaviour
         float rot = 0;
         if (target == initialTipPosition)
         {
+            if(state == SpikeState.Attached) 
+                print("setting init");
             rot = initialRotation;
         }
         else
@@ -162,6 +186,6 @@ public class SHITSpikeScipt : MonoBehaviour
             _currentSpikeRotationSpeed = rotationSpeed;
         }
         transform.rotation =  Quaternion.Euler(0, 0, Mathf.LerpAngle(transform.localRotation.eulerAngles.z, rot, Time.deltaTime * _currentSpikeRotationSpeed));
-        transform.GetChild(0).localPosition = new Vector3(0, Mathf.Clamp(Mathf.Lerp(transform.GetChild(0).localPosition.y, targetLocalY, _currentSpikeSpeed * Time.deltaTime), spikeStartPos.y, shootingRange));
+        transform.GetChild(0).localPosition = new Vector3(0, /*Mathf.Clamp(*/Mathf.Lerp(transform.GetChild(0).localPosition.y, targetLocalY, _currentSpikeSpeed * Time.deltaTime)/*, spikeStartPos.y, shootingRange)*/);
     }
 }

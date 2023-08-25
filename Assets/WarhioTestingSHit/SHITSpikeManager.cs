@@ -81,7 +81,7 @@ public class SHITSpikeManager : MonoBehaviour
     }
     public void Prepare()
     {
-        attachedSpike = null;
+        
         if (state == SpikeManagerState.None)
             state = SpikeManagerState.Prepare;
     }
@@ -108,7 +108,13 @@ public class SHITSpikeManager : MonoBehaviour
         {
             try
             {
-                spikeList[getClosestSpike()].Shoot(getMousePos());
+                if (attachedSpike != null)
+                {
+                    attachedSpike.Detach();
+                    attachedSpike = null;
+                }
+                spikeList[getClosestSpike()].Shoot(getMousePos(), transform.parent);
+                transform.parent = null;
             }
             catch
             {
