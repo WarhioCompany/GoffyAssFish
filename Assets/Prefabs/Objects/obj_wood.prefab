@@ -101,13 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e83bb71a81b4f4e84a0ded43ae1752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dissolveParticles: {fileID: 0}
+  dissolveParticles: {fileID: 5743767120522924361}
   finalDissolvePrefab: {fileID: 3274723342876711547, guid: e6aba71a4639d9045b75f25902d46a21, type: 3}
   disolveTime: 30
   mass: 0
   gravity: 100
-  baseMass: 1
-  massMultiplier: 3
+  baseMass: 0.4
+  massMultiplier: 20
   isPlayerAttached: 0
   minScale: 0.7
   maxScale: 2
@@ -237,6 +237,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
+--- !u!1 &5743767120522924361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
+  m_PrefabInstance: {fileID: 2243072814586408430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8230880879891817929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7861323808068831271, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
