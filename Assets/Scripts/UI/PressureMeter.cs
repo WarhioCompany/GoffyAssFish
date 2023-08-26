@@ -41,7 +41,7 @@ public class PressureMeter : MonoBehaviour
 
     public float getCurBars()
     {
-        Debug.Log("Height: " + -GameValues.height);
+        //Debug.Log("Height: " + -GameValues.height);
         return (-GameValues.height * 997f * 9.807f) / 12000f;
     }
 }

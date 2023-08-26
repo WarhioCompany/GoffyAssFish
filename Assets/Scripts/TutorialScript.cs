@@ -50,7 +50,7 @@ public class TutorialScript : MonoBehaviour
     public string[] epilogText;
 
     private bool readyForAction;
-    private int curTextIdx;
+    public int curTextIdx;
     private bool waitForMouseClick;
     private bool waitForAttach;
     private bool canClick;
@@ -163,6 +163,7 @@ public class TutorialScript : MonoBehaviour
 
                 if (!readyForAction) return;
 
+
                 if (!waitForMouseClick && !waitForAttach)
                 {
                     // set time
@@ -174,8 +175,8 @@ public class TutorialScript : MonoBehaviour
                 }
                 else if (waitForMouseClick)
                 {
-                    blackBox.transform.position = firstWood.transform.position;
-                    clickIndocator.transform.position = grabClickPos.transform.position;
+                    blackBox.transform.position = secondWood.transform.position;
+                    clickIndocator.transform.position = pushClickPos.transform.position;
                 }
 
                 if (Input.GetMouseButtonUp(0) && waitForMouseClick && canClick)
@@ -187,13 +188,16 @@ public class TutorialScript : MonoBehaviour
                     waitForMouseClick = false;
                     waitForAttach = true;
                 }
-
-                if (waitForAttach && firstWood.GetComponent<ObjectScript>().isPlayerAttached)
+                else if (waitForAttach && secondWood.GetComponent<ObjectScript>().isPlayerAttached)
                 {
                     readyForAction = false;
-                    state = tutorialState.EPILOG;
+                    waitForAttach = false;
+                    waitForMouseClick = false;
                     canClick = false;
                     curTextIdx = 0;
+                    state = tutorialState.EPILOG;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = false;
+                    Time.timeScale = 0;
                 }
 
                 if (Input.GetMouseButtonUp(0) && readyForAction)

@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 61461003}
   - component: {fileID: 61460997}
   - component: {fileID: 61460996}
+  - component: {fileID: 61461006}
   - component: {fileID: 61460998}
   - component: {fileID: 61461005}
   - component: {fileID: 61461002}
@@ -392,7 +393,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61460989}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df0c732f37b8dd641a965477aa352d76, type: 3}
   m_Name: 
@@ -629,11 +630,9 @@ MonoBehaviour:
   state: 0
   closestSpike: {fileID: 0}
   attachedSpike: {fileID: 0}
+  lastObj: {fileID: 0}
+  pushForce: 1.5
   cam: {fileID: 1120479738}
-  mousePosLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  follow: {fileID: 1426876515}
   canShoot: 0
 --- !u!82 &61461005
 AudioSource:
@@ -731,6 +730,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &61461006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61460989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794a1f56458835b47bd40fb8bc6c21a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 61461005}
 --- !u!1001 &82302133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4519,90 +4531,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1 &1426876515
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1426876517}
-  - component: {fileID: 1426876516}
-  m_Layer: 0
-  m_Name: mouseFollowTest
-  m_TagString: followDebug
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1426876516
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426876515}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 59e83260dbe56ee46ad2e3751b27b081, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5, y: 5}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1426876517
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426876515}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1479763260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 17f04cdc6f905fe49af1035a46d9fc95, type: 3}
@@ -6481,7 +6409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85e9713adfbe2b43853fc9887a16a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skip: 1
+  skip: 0
   maxTutorialHeight: -24
   blackBox: {fileID: 435388389}
   clickIndocator: {fileID: 313559832}
@@ -6499,11 +6427,13 @@ MonoBehaviour:
   - Click in the direction of an Object to grab it.
   - Your spike will pull you to the Object
   pushText:
-  - Click in the direction of you vurrent object, to push yourself away
+  - Click in the direction of you current object, to push yourself away
   - you have to grab onto another object after that
   - you can throw objects at enemys to slow them down
   epilogText:
+  - The pressure meter shows where the enemys cant follow you!
   - Good luck litte urchent!
+  curTextIdx: 0
 --- !u!4 &2076983504
 Transform:
   m_ObjectHideFlags: 0
@@ -6809,4 +6739,3 @@ SceneRoots:
   - {fileID: 858140902}
   - {fileID: 435388391}
   - {fileID: 313559835}
-  - {fileID: 1426876517}
