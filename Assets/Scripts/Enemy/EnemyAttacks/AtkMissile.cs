@@ -40,6 +40,10 @@ public class AtkMissile : MonoBehaviour
 
             if (obj.CompareTag("Object"))
             {
+                if (obj.GetComponentInChildren<SHITSpikeManager>())
+                {
+                    obj.GetComponentInChildren<SHITSpikeManager>().transform.parent = null;
+                }
                 Quaternion rotation = Quaternion.LookRotation(obj.transform.position - transform.position);
                 Instantiate(dissolveParticle, obj.transform.position, rotation);
                 Destroy(obj.gameObject, 2);
