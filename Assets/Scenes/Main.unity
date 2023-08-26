@@ -160,8 +160,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 207.74591, y: 514.0646, z: 14.203323}
-  m_Center: {x: 24.03194, y: -254.2934, z: -25.813393}
+  m_Size: {x: 207.74591, y: 716.97003, z: 14.203323}
+  m_Center: {x: 24.031937, y: -355.74612, z: -25.813393}
 --- !u!114 &15622323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6561280d21734154ab1027af36a9d14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightMeterRatio: 0.25
+  heightMeterRatio: 2
 --- !u!114 &61460993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61460989}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df0c732f37b8dd641a965477aa352d76, type: 3}
   m_Name: 
@@ -461,7 +461,7 @@ Transform:
   m_GameObject: {fileID: 61460989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2277,6 +2277,7 @@ MonoBehaviour:
   arrow: {fileID: 552845231}
   offset: 30
   totalMaxRotation: 304
+  maxPressure: 117.33
 --- !u!1001 &574695793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4086,11 +4087,11 @@ PrefabInstance:
       objectReference: {fileID: 1298078566}
     - target: {fileID: 2839069461705271710, guid: 1fec9d9a7c4cbb54b85332bd4c79a5e5, type: 3}
       propertyPath: offset
-      value: 120
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 2839069461705271710, guid: 1fec9d9a7c4cbb54b85332bd4c79a5e5, type: 3}
       propertyPath: totalMaxRotation
-      value: 270
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 4473591025606666587, guid: 1fec9d9a7c4cbb54b85332bd4c79a5e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4951,11 +4952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[0]
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[1]
-      value: 600
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[2]
@@ -6383,7 +6384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4736911667893431724, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4736911667893431724, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LocalPosition.z
