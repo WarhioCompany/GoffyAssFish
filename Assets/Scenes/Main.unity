@@ -252,6 +252,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.429738
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2572985
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.1432462
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00025344
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 988980113811865551, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
       propertyPath: active
       value: 1
@@ -634,6 +658,10 @@ MonoBehaviour:
   lastObj: {fileID: 0}
   pushForce: 1
   cam: {fileID: 1120479738}
+  mousePosLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  follow: {fileID: 0}
   canShoot: 0
 --- !u!82 &61461005
 AudioSource:
