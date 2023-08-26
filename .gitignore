@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 
 /[Aa]ssets/Scenes/TestScenes/
+
+# Auto-generated directories for Apple environments
+**/.DS_Store
