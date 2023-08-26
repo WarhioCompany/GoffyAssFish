@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8542213605433235160}
   - component: {fileID: 8495751087617546971}
   - component: {fileID: 2008558673325178189}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: obj_shoes
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -100,13 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e83bb71a81b4f4e84a0ded43ae1752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dissolveParticles: {fileID: 0}
+  dissolveParticles: {fileID: 4356860963980387972}
   finalDissolvePrefab: {fileID: 3274723342876711547, guid: e6aba71a4639d9045b75f25902d46a21, type: 3}
   disolveTime: 30
   mass: 0
   gravity: 100
-  baseMass: 1
-  massMultiplier: 3
+  baseMass: 1.5
+  massMultiplier: 5
   isPlayerAttached: 0
   minScale: 0.7
   maxScale: 2
@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Disolving
       objectReference: {fileID: 0}
+    - target: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7861323808068831271, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -218,5 +222,10 @@ PrefabInstance:
 --- !u!4 &142618444519887364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7861323808068831271, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
+  m_PrefabInstance: {fileID: 7846298465541118499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4356860963980387972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5806559477332475047, guid: 15b63a5e45a9fbc4986e99cb364f9819, type: 3}
   m_PrefabInstance: {fileID: 7846298465541118499}
   m_PrefabAsset: {fileID: 0}

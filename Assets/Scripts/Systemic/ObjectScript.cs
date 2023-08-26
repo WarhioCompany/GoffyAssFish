@@ -25,6 +25,7 @@ public class ObjectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gravity = GameValues.objGravity;
         rb = GetComponent<Rigidbody>();
         Randomize();
     }
@@ -88,8 +89,7 @@ public class ObjectScript : MonoBehaviour
         retVal.y = newScale;
 
         // set mass
-        mass = baseMass * newScale;
-        GetComponent<Rigidbody>().mass = mass * massMultiplier;
+        mass = baseMass * newScale * massMultiplier;
 
         orgScale = retVal;
         return retVal;

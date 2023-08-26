@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SpikeCollider : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay(Collider collision)
     {
+        //print("onStay");
+        GetComponentInParent<SHITSpikeScipt>().Hit(collision);
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        //just in case
         GetComponentInParent<SHITSpikeScipt>().Hit(collision);
     }
 }

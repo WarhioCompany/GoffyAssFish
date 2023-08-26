@@ -10,6 +10,8 @@ TagManager:
   - enemySpawn
   - enemyManager
   - enemy
+  - mousePosPlane
+  - followDebug
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - UI
   - DistortionEffect
   - Attack
-  - 
-  - 
-  - 
+  - Object
+  - Spike
+  - MousePosPlane
   - 
   - 
   - 

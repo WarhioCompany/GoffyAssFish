@@ -11,6 +11,7 @@ public class GameValues
     public static float enemyHeight;
 
     public const float maxObjHeightOffset = 100;
+    public const float objGravity = 0.5f;
 
     public const float worldXOffset = 25;
 

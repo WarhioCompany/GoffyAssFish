@@ -57,7 +57,12 @@ public class TutorialScript : MonoBehaviour
 
     private void Start()
     {
-        if (skip) ResetChanges();
+        if (skip) {
+            ResetChanges();
+            return;
+        } 
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = false;
         ShowNextText();
     }
 
@@ -132,12 +137,14 @@ public class TutorialScript : MonoBehaviour
                     canClick = false;
                     curTextIdx = 0;
                     state = tutorialState.PUSH;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = false;
                     Time.timeScale = 0;
                 }
 
                 if (Input.GetMouseButtonUp(0) && readyForAction)
                 {
                     canClick = true;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = true;
                 }
                 break;
             case tutorialState.PUSH:
@@ -192,6 +199,7 @@ public class TutorialScript : MonoBehaviour
                 if (Input.GetMouseButtonUp(0) && readyForAction)
                 {
                     canClick = true;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = true;
                 }
                 break;
             case tutorialState.EPILOG:
@@ -222,6 +230,10 @@ public class TutorialScript : MonoBehaviour
 
     public void ResetChanges()
     {
+        textBubble.gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<SHITSpikeManager>().canShoot = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<UIManager>().UIFadeIn();
+
         // reset time
         Time.timeScale = 1;
 

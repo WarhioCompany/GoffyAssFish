@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using LevelSystem;
 using TMPro;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -59,6 +60,16 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+    public void UIFadeIn()
+    {
+        uiAnim.SetBool("active", true);
+    }
+
+    public void RetryBtn()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     public void Update(){
         UpdateUI(); 

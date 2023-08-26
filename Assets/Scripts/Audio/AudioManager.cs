@@ -2,6 +2,7 @@ using UnityEngine.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
 
     private AudioSource source;
+
+    public float startMaster;
+
     private void Awake()
     {
         source = GetComponent<AudioSource>();
@@ -18,6 +22,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mixer.SetFloat("masterVolume", startMaster);
         PlayMusic();
     }
 

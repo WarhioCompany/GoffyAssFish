@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6830926742241743961}
   - component: {fileID: 5322265840726064818}
   - component: {fileID: 6044662856091595036}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2024041160146297384}
+  - {fileID: 6730893027044317444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!331 &6830926742241743961
@@ -121,7 +122,40 @@ MonoBehaviour:
   initialRotation: 0
   manager: {fileID: 0}
   sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  follow: {fileID: 3344810660069082909, guid: f9c95f17d43774a43a843bad175afd2a, type: 3}
+  initialTipPosition: {fileID: 6730893027044317444}
   state: 0
+--- !u!1 &4437893473480175011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6730893027044317444}
+  m_Layer: 9
+  m_Name: iniTipPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6730893027044317444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437893473480175011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1138301140776863242}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6359435250774584359
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,8 +167,8 @@ GameObject:
   - component: {fileID: 2024041160146297384}
   - component: {fileID: 5466373495295221235}
   - component: {fileID: 1582684252782428691}
-  - component: {fileID: 981876902429870477}
-  m_Layer: 0
+  - component: {fileID: 8999650568632902751}
+  m_Layer: 9
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,15 +254,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b38b8987e744140b096aa039374519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &981876902429870477
-BoxCollider2D:
+--- !u!65 &8999650568632902751
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6359435250774584359}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -237,31 +269,9 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.075671315, y: 9.875551}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 5, y: 10}
-    newSize: {x: 5, y: 10}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.20747733, y: 0.24889755}
-  m_EdgeRadius: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.17028728, y: 1.9995155, z: 0.2}
+  m_Center: {x: 0.07875274, y: 9.000242, z: 0}

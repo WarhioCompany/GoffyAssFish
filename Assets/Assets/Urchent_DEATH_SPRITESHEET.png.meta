@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,7 +134,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Urchent_DEATH_SPRITESHEET_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be80ad6e3942a041843c0e61de0d30b
+      internalID: -595720607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Urchent_DEATH_SPRITESHEET_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 0
+        width: 37
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf25c1194b6396c4590dfdb24a2c6096
+      internalID: -285634547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Urchent_DEATH_SPRITESHEET_2
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 0
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 011b11206754250458f29fe15df390c1
+      internalID: -1400885830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Urchent_DEATH_SPRITESHEET_3
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 0
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78473b08f95dbdb4b8531ba6be01ebeb
+      internalID: 1878763032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Urchent_DEATH_SPRITESHEET_4
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 0
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d93e8e5024a885f439958502a66278e8
+      internalID: -1572228714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Urchent_DEATH_SPRITESHEET_5
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 0
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd4e95fc71c1944c84f7a9df9304c65
+      internalID: -1317328429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +271,25 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Urchent_DEATH_SPRITESHEET_0: -595720607
+      Urchent_DEATH_SPRITESHEET_1: -285634547
+      Urchent_DEATH_SPRITESHEET_10: 1398257907
+      Urchent_DEATH_SPRITESHEET_11: 1822615531
+      Urchent_DEATH_SPRITESHEET_12: -821756255
+      Urchent_DEATH_SPRITESHEET_13: -244558549
+      Urchent_DEATH_SPRITESHEET_14: 1476884188
+      Urchent_DEATH_SPRITESHEET_15: 866007578
+      Urchent_DEATH_SPRITESHEET_16: 1811574537
+      Urchent_DEATH_SPRITESHEET_17: 812432246
+      Urchent_DEATH_SPRITESHEET_2: -1400885830
+      Urchent_DEATH_SPRITESHEET_3: 1878763032
+      Urchent_DEATH_SPRITESHEET_4: -1572228714
+      Urchent_DEATH_SPRITESHEET_5: -1317328429
+      Urchent_DEATH_SPRITESHEET_6: 58061509
+      Urchent_DEATH_SPRITESHEET_7: 2000722301
+      Urchent_DEATH_SPRITESHEET_8: 111485183
+      Urchent_DEATH_SPRITESHEET_9: 1450433822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

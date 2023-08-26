@@ -31,6 +31,7 @@ public class AtkBomb : MonoBehaviour
 
         // explode
         ScreenShakeCam.Instance.ShakeCam(10, 1);
+        SoundManager.instance.playOneShot("explosion");
 
         // Explode Animation (ParticleSystem)
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
@@ -44,14 +45,12 @@ public class AtkBomb : MonoBehaviour
             // push Objects away abit
             obj.GetComponent<Rigidbody>().AddForce((obj.transform.position - transform.position) * explosionStrenght, ForceMode.Impulse);
 
-            // Calculate rotation to make the particle face away from the explosion
-            Quaternion rotation = Quaternion.LookRotation(obj.transform.position - transform.position);
-
-            // spawn ParticleBurst in direction away from explosion
-            Instantiate(dissolveParticle, obj.transform.position, rotation);
-
-            // destroy Prop
-            Destroy(obj, 2);
+            if (obj.CompareTag("Object"))
+            {
+                Quaternion rotation = Quaternion.LookRotation(obj.transform.position - transform.position);
+                Instantiate(dissolveParticle, obj.transform.position, rotation);
+                Destroy(obj.gameObject, 2);
+            }
         }
         Destroy(gameObject);
     }

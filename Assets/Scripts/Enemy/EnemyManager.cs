@@ -9,8 +9,8 @@ public class EnemyManager : MonoBehaviour
     public bool activated;
 
     public GameObject firstEnemy; // preplace enemy (Angel guy: Always there)
-    private int curEnemIdx = -1; // current enemy
-    [HideInInspector] public GameObject curEnemy;
+    public int curEnemIdx = -1; // current enemy
+    public GameObject curEnemy;
 
     [Header("Enemy Spawn")]
     public Transform EnemySpawn;
@@ -30,7 +30,10 @@ public class EnemyManager : MonoBehaviour
         if (GameValues.height < -enemyChangeHeight[curEnemIdx + 1]) 
         {
             Debug.Log("Spawning new Enemy...");
-            curEnemIdx++;
+            if (curEnemIdx < enemyPrefabs.Length-1)
+            {
+                curEnemIdx++;
+            }
 
             // destroy old enemy
             if (curEnemy != firstEnemy)
@@ -40,6 +43,7 @@ public class EnemyManager : MonoBehaviour
 
             // spawn new enemy
             curEnemy = Instantiate(enemyPrefabs[curEnemIdx], EnemySpawn.position, Quaternion.identity);
+            curEnemy.GetComponent<EnemyMovement>().active = true;
         }
     }
 }
