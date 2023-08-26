@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5139474, g: 0.5727325, b: 0.62353444, a: 1}
+  m_IndirectSpecularColor: {r: 0.51507246, g: 0.5736967, b: 0.6240209, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -180,6 +180,30 @@ PrefabInstance:
     - target: {fileID: 31526423355271637, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.429738
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2572985
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.1432462
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00025344
+      objectReference: {fileID: 0}
+    - target: {fileID: 445289954159163821, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 988980113811865551, guid: 704d9b12beb8b584a973d08b2f08c16a, type: 3}
       propertyPath: active
@@ -558,6 +582,10 @@ MonoBehaviour:
   closestSpike: {fileID: 0}
   attachedSpike: {fileID: 0}
   cam: {fileID: 1120479738}
+  mousePosLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  follow: {fileID: 0}
   canShoot: 0
 --- !u!1001 &82302133
 PrefabInstance:
