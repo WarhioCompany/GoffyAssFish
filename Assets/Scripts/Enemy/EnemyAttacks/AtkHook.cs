@@ -29,7 +29,7 @@ public class AtkHook : MonoBehaviour
 
     private void Update()
     {
-        float height = GameValues.height / GameValues.heightMeterRatio; // height in unity meters
+        float height = GameObject.FindGameObjectWithTag("Player").transform.position.y; // height in unity meters
         Vector3 targetPos;
 
         if (waiting)

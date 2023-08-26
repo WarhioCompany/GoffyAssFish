@@ -60,6 +60,7 @@ public class EnemyBoat : MonoBehaviour
             else if (curAimTimer <= 0)
             {
                 aiming = false;
+                GetComponentInChildren<boatAudio>().ShootHarpoon();
                 Shoot();
             }
         }

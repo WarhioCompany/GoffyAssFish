@@ -98,12 +98,14 @@ public class EnemySubmarine : MonoBehaviour
     {
         // instanciate harpoon prefab
         Instantiate(harpoonPrefab, shootingPoint.transform.position, shootingPoint.transform.rotation);
+        GetComponentInChildren<submarinAudio>().ShootHarpoon();
         curTimer = fireRate;
     }
     public void ShootMissile()
     {
         // instanciate harpoon prefab
         Instantiate(missilePrefab, shootingPointMissile.transform.position, missilePrefab.transform.rotation);
+        GetComponentInChildren<submarinAudio>().ShootMissile();
         curTimerMissile = fireRateMissile;
     }
     public void ShootBomb()

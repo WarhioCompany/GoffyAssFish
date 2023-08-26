@@ -17,6 +17,7 @@ public class Bubble : MonoBehaviour
     public void Explode()
     {
         currentExplode = Instantiate(ExplodeEffect, transform);
+        GetComponent<AudioSource>().PlayOneShot(SoundManager.instance.getClip("bubble_pop"));
         BubbleSpawner.Instance.Despawn(Key);
     }
 

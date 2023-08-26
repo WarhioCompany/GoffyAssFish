@@ -1,0 +1,4 @@
+used_fonts:
+* Alta (primarily for ui_mainmenu)
+* Staaliches (Level Display)
+* DSEG14 Classic-Bold (Depth Meter)

@@ -29,7 +29,7 @@ public class SHITSpikeScipt : MonoBehaviour
 
     public Sprite sprite;
 
-    public GameObject follow;
+    //public GameObject follow;
 
     Collider hitCollider;
 
@@ -59,8 +59,8 @@ public class SHITSpikeScipt : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, manager.getMousePos());
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(follow.transform.position, 0.5f);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(follow.transform.position, 0.5f);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(initialTipPosition.position, 0.3f);
@@ -69,7 +69,7 @@ public class SHITSpikeScipt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        follow = Instantiate(follow);
+        //follow = Instantiate(follow);
 
         marker = Instantiate(new GameObject());
         marker.AddComponent<SpriteRenderer>().sprite = sprite;
@@ -126,10 +126,18 @@ public class SHITSpikeScipt : MonoBehaviour
     public void Hit(Collider hit)
     {
         if (state != SpikeState.Shoot) return;
+
+        if (hit.gameObject == manager.lastObj)
+        {
+            manager.Push(hit, this);
+            return;
+        }
+
         print("hit confirmed");
         hitCollider = hit;
         state = SpikeState.Hit;
         manager.attachedSpike = this;
+        manager.lastObj = hit.gameObject;
     }
     public void Detach()
     {
@@ -140,7 +148,7 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         if (manager.state == SHITSpikeManager.SpikeManagerState.Prepare && manager.closestSpike == this)
         {
-            Debug.Log("O");
+            //Debug.Log("O");
             target = TargetAngleFix(manager.getMousePos()); 
         }
         else if (state == SpikeState.Shoot)
@@ -210,7 +218,7 @@ public class SHITSpikeScipt : MonoBehaviour
             _currentSpikeRotationSpeed = rotationSpeed;
         }
 
-        follow.transform.position = target;
+        //follow.transform.position = target;
 
         transform.rotation =  Quaternion.Euler(0, 0, Mathf.LerpAngle(transform.rotation.eulerAngles.z, rot, Time.deltaTime * _currentSpikeRotationSpeed));
         transform.GetChild(0).localPosition = new Vector3(0, /*Mathf.Clamp(*/Mathf.Lerp(transform.GetChild(0).localPosition.y, targetLocalY, _currentSpikeSpeed * Time.deltaTime)/*, spikeStartPos.y, shootingRange)*/);

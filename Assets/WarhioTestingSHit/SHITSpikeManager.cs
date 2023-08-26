@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class SHITSpikeManager : MonoBehaviour
 {
@@ -21,10 +20,12 @@ public class SHITSpikeManager : MonoBehaviour
 
     public SHITSpikeScipt closestSpike;
     public SHITSpikeScipt attachedSpike;
+    public GameObject lastObj;
+    public float pushForce;
 
     public Camera cam;
-    public LayerMask mousePosLayer;
-    public GameObject follow;
+    //public LayerMask mousePosLayer;
+    //public GameObject follow;
 
     public bool canShoot;
  
@@ -125,11 +126,21 @@ public class SHITSpikeManager : MonoBehaviour
             GetComponent<Animator>().SetBool("grab", true);
         }
     }
+
+    public void Push(Collider obj, SHITSpikeScipt spike)
+    {
+        Debug.Log("Pushing!");
+        transform.parent = null;
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().AddForce((transform.position - spike.GetTipPosition()).normalized * pushForce, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(2f * pushForce * (spike.GetTipPosition() - transform.position).normalized, ForceMode.Impulse);
+    }
+
     // Update is called once per frame
     void Update()
     {
         transform.rotation = Quaternion.identity;
-        follow.transform.position = getMousePos();
+        //follow.transform.position = getMousePos();
 
         if (state == SpikeManagerState.Prepare)
         {

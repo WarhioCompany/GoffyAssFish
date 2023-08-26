@@ -5,20 +5,35 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager instance { private set; get; }
+
     // SoundLibary
     public SoundLibary[] sounds;
 
-    public AudioClip getClip(string identifyer)
+    private void Start()
     {
+        instance = this;
+    }
+
+    public AudioClip getClip(string identifier)
+    {
+        AudioClip clip = null;
+
         foreach (var sound in sounds)
         {
-            if (sound.identifyer == identifyer)
+            if (sound.identifyer == identifier)
             {
-                return sound.clip;
+                clip = sound.clip;
+                break;
             }
         }
 
-        return null;
+        return clip;
+    }
+
+    public void playOneShot(string sound)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>().PlayOneShot(getClip(sound));
     }
 }
 
