@@ -27,23 +27,27 @@ public class EnemyManager : MonoBehaviour
     {
         if (!activated) { return; }
         //Debug.Log(GameValues.height + " / " + -enemyChangeHeight[curEnemIdx + 1]);
-        if (GameValues.height < -enemyChangeHeight[curEnemIdx + 1]) 
+        try
         {
-            Debug.Log("Spawning new Enemy...");
-            if (curEnemIdx < enemyPrefabs.Length-1)
+            if (GameValues.height < -enemyChangeHeight[curEnemIdx + 1])
             {
-                curEnemIdx++;
-            }
+                Debug.Log("Spawning new Enemy...");
+                if (curEnemIdx < enemyPrefabs.Length - 1)
+                {
+                    curEnemIdx++;
+                }
 
-            // destroy old enemy
-            if (curEnemy != firstEnemy)
-            {
-                curEnemy.GetComponent<EnemyMovement>().PleaseDie();
-            }
+                // destroy old enemy
+                if (curEnemy != firstEnemy)
+                {
+                    curEnemy.GetComponent<EnemyMovement>().PleaseDie();
+                }
 
-            // spawn new enemy
-            curEnemy = Instantiate(enemyPrefabs[curEnemIdx], EnemySpawn.position, Quaternion.identity);
-            curEnemy.GetComponent<EnemyMovement>().active = true;
+                // spawn new enemy
+                curEnemy = Instantiate(enemyPrefabs[curEnemIdx], EnemySpawn.position, Quaternion.identity);
+                curEnemy.GetComponent<EnemyMovement>().active = true;
+            }
         }
+        catch { }
     }
 }

@@ -658,10 +658,6 @@ MonoBehaviour:
   lastObj: {fileID: 0}
   pushForce: 1
   cam: {fileID: 1120479738}
-  mousePosLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  follow: {fileID: 0}
   canShoot: 0
 --- !u!82 &61461005
 AudioSource:
@@ -4966,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[1]
-      value: 250
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[2]
@@ -6517,7 +6513,7 @@ MonoBehaviour:
   - you have to grab onto another object after that
   - you can throw objects at enemys to slow them down
   epilogText:
-  - The pressure meter shows where the enemys cant follow you!
+  - The pressure meter (bottom left) shows where the enemys cant follow you!
   - Good luck litte urchent!
   curTextIdx: 0
 --- !u!4 &2076983504
