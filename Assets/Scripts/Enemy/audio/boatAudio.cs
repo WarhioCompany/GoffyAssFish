@@ -13,6 +13,8 @@ public class boatAudio : MonoBehaviour
 
     public void ShootHarpoon()
     {
-        source.PlayOneShot(SoundManager.instance.getClip("harpoon_shot"));
+        AudioClip sfx = SoundManager.instance.getClip("harpoon_shot");
+        if (sfx != null)
+            source.PlayOneShot(SoundManager.instance.getClip("harpoon_shot")); 
     }
 }

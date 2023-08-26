@@ -12,10 +12,21 @@ public class PressureMeter : MonoBehaviour
     private float rotationSpeed = 10f;
     private float maxWiggleAngle = 5f;
 
+    private void Start()
+    {
+        maxPressure = (GameValues.MaxHeight * 997f * 9.807f) / 100000;
+    }
+
     private void Update()
     {
+        Debug.Log(GameValues.height);
+
         float percent = getCurBars() / maxPressure;
         float angle = totalMaxRotation * percent;
+
+        Debug.Log(getCurBars() / maxPressure);
+
+        Debug.Log("Angle: " + (percent + angle).ToString());
 
         // Calculate the target rotation
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle+offset);
@@ -32,6 +43,6 @@ public class PressureMeter : MonoBehaviour
 
     public float getCurBars()
     {
-        return (GameValues.height * 997 * 9.807f) / 100000;
+        return (-GameValues.height * 997f * 9.807f) / 100000;
     }
 }

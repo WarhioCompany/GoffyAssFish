@@ -15,17 +15,20 @@ public class SoundManager : MonoBehaviour
         instance = this;
     }
 
-    public AudioClip getClip(string identifyer)
+    public AudioClip getClip(string identifier)
     {
+        AudioClip clip = null;
+
         foreach (var sound in sounds)
         {
-            if (sound.identifyer == identifyer)
+            if (sound.identifyer == identifier)
             {
-                return sound.clip;
+                clip = sound.clip;
+                break;
             }
         }
 
-        return null;
+        return clip;
     }
 
     public void playOneShot(string sound)

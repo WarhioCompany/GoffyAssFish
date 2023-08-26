@@ -68,7 +68,8 @@ public class UIManager : MonoBehaviour
 
     public void RetryBtn()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        Destroy(GameObject.FindWithTag("AudioManager"));
     }
 
     public void Update(){
