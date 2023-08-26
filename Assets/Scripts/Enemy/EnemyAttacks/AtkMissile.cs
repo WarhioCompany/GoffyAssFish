@@ -25,13 +25,20 @@ public class AtkMissile : MonoBehaviour
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         SoundManager.instance.playOneShot("explosion");
 
-        Collider[] objs = Physics.OverlapSphere(transform.position, explosionRadius);
+        if (other.CompareTag("Player"))
+        {
+            other.transform.parent = null;
+            other.GetComponent<SHITSpikeManager>().lastObj = null;
+            other.GetComponent<Rigidbody>().isKinematic = false;
+        }
 
+        Collider[] objs = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider obj in objs)
         {
-            if (obj.CompareTag("Attack")) continue;
+            if (obj.CompareTag("Attack") || obj.CompareTag("Player")) continue;
 
             Rigidbody objRb = obj.GetComponent<Rigidbody>();
+
             if (objRb != null)
             {
                 objRb.AddExplosionForce(explosionStrength, transform.position, explosionRadius);

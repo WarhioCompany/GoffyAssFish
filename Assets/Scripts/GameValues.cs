@@ -6,7 +6,7 @@ public class GameValues
 {
     public static float height;
     public static float heightMeterRatio;
-    public const float MaxHeight = 1200;
+    public const float MaxHeight = 1400;
 
     public static float enemyHeight;
 

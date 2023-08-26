@@ -11,6 +11,11 @@ public class SpikeCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.GetComponent<Bubble>())
+        {
+            collision.GetComponent<Bubble>().Explode();
+        }
+
         //just in case
         GetComponentInParent<SHITSpikeScipt>().Hit(collision);
     }

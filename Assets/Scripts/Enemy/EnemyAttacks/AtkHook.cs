@@ -18,6 +18,10 @@ public class AtkHook : MonoBehaviour
         {
             // Player on Hook --> pull him up shortly
             Debug.Log("HitByHook");
+            other.transform.parent = null;
+            other.GetComponent<SHITSpikeManager>().lastObj = null;
+            other.GetComponent<Rigidbody>().isKinematic = false;
+            other.GetComponent <Rigidbody>().AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
         }
     }
 

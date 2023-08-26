@@ -42,6 +42,15 @@ public class AtkBomb : MonoBehaviour
         foreach (Collider obj in objs)
         {
             if (obj.CompareTag("Attack")) continue;
+
+            if (obj.CompareTag("Player"))
+            {
+                obj.transform.parent = null;
+                obj.GetComponent<SHITSpikeManager>().lastObj = null;
+                obj.GetComponent<Rigidbody>().isKinematic = false;
+                continue;
+            }
+
             // push Objects away abit
             obj.GetComponent<Rigidbody>().AddForce((obj.transform.position - transform.position) * explosionStrenght, ForceMode.Impulse);
 

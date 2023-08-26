@@ -492,6 +492,7 @@ Transform:
   m_Children:
   - {fileID: 1298078564}
   - {fileID: 368606194}
+  - {fileID: 1094417772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &61460996
@@ -509,7 +510,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -655,12 +656,8 @@ MonoBehaviour:
   closestSpike: {fileID: 0}
   attachedSpike: {fileID: 0}
   lastObj: {fileID: 0}
-  pushForce: 1.5
+  pushForce: 1
   cam: {fileID: 1120479738}
-  mousePosLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  follow: {fileID: 0}
   canShoot: 0
 --- !u!82 &61461005
 AudioSource:
@@ -1049,7 +1046,7 @@ GameObject:
   - component: {fileID: 275963684}
   - component: {fileID: 275963685}
   - component: {fileID: 275963686}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: wallCollidersRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3204,6 +3201,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a59f5dcd3e171664ba4ddcb971ee7657, type: 3}
+--- !u!1 &858140903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8650079681300498627, guid: a59f5dcd3e171664ba4ddcb971ee7657, type: 3}
+  m_PrefabInstance: {fileID: 858140902}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865964296
 GameObject:
   m_ObjectHideFlags: 0
@@ -3809,6 +3811,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 17f04cdc6f905fe49af1035a46d9fc95, type: 3}
   m_PrefabInstance: {fileID: 1674462104}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1094417771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1094417772}
+  - component: {fileID: 1094417773}
+  m_Layer: 10
+  m_Name: col
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1094417772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094417771}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 61460995}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1094417773
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094417771}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.7478414, y: 2.5880218, z: 1}
+  m_Center: {x: 0.01712823, y: -0.005322218, z: 0}
 --- !u!20 &1120479738 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8428631510335421655, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
@@ -3953,11 +4008,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 17f04cdc6f905fe49af1035a46d9fc95, type: 3}
   m_PrefabInstance: {fileID: 1360303695}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1197926872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8650079681300498627, guid: a59f5dcd3e171664ba4ddcb971ee7657, type: 3}
-  m_PrefabInstance: {fileID: 715355124}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1202585932 stripped
 Transform:
@@ -4447,7 +4497,7 @@ GameObject:
   - component: {fileID: 1419317153}
   - component: {fileID: 1419317152}
   - component: {fileID: 1419317155}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: wallCollidersLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -4912,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[1]
-      value: 250
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1555638009675290348, guid: 60013f4c46689c9488e4d6665a3fed8a, type: 3}
       propertyPath: enemyChangeHeight.Array.data[2]
@@ -6260,7 +6310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400338679631392458, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_DeadZoneWidth
-      value: 0.122
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400338679631392458, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LookaheadTime
@@ -6271,12 +6321,16 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 400338679631392458, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
+      propertyPath: m_DeadZoneHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400338679631392458, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LookaheadSmoothing
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400338679631392458, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_TrackedObjectOffset.y
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 931780517443879493, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6340,7 +6394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4736911667893431724, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4736911667893431724, guid: c15622c1871e7ab47975a009ae14e2bd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6444,7 +6498,7 @@ MonoBehaviour:
   grabClickPos: {fileID: 1907922880}
   pushClickPos: {fileID: 2131279877}
   firstWood: {fileID: 842814135}
-  secondWood: {fileID: 1197926872}
+  secondWood: {fileID: 858140903}
   state: 0
   textBubble: {fileID: 291121584}
   introductionText:
@@ -6459,7 +6513,7 @@ MonoBehaviour:
   - you have to grab onto another object after that
   - you can throw objects at enemys to slow them down
   epilogText:
-  - The pressure meter shows where the enemys cant follow you!
+  - The pressure meter (bottom left) shows where the enemys cant follow you!
   - Good luck litte urchent!
   curTextIdx: 0
 --- !u!4 &2076983504
@@ -6763,7 +6817,7 @@ SceneRoots:
   - {fileID: 15622324}
   - {fileID: 39002482}
   - {fileID: 1157639101}
-  - {fileID: 715355124}
   - {fileID: 858140902}
+  - {fileID: 715355124}
   - {fileID: 435388391}
   - {fileID: 313559835}
