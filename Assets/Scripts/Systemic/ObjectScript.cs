@@ -34,6 +34,16 @@ public class ObjectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for player
+        if (GetComponentInChildren<SHITSpikeManager>())
+        {
+            isPlayerAttached = true;
+        }
+        else
+        {
+            isPlayerAttached = false;
+        }
+
         // movement
         if (rb.velocity.magnitude <= mass * gravity)
         {
