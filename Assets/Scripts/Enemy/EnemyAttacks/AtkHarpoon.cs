@@ -26,7 +26,9 @@ public class AtkHarpoon : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            // Hit the player
+            other.transform.parent = null;
+            other.GetComponent<SHITSpikeManager>().lastObj = null;
+            other.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
