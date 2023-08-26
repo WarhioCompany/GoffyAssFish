@@ -14,9 +14,4 @@ public class GameValues
     public const float objGravity = 0.5f;
 
     public const float worldXOffset = 25;
-
-    public static float getHeight(float actualHeight)
-    {
-        return actualHeight * heightMeterRatio * -1;
-    }
 }

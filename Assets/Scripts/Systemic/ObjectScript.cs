@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectScript : MonoBehaviour
@@ -63,12 +64,12 @@ public class ObjectScript : MonoBehaviour
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, dissolveSpeed * Time.deltaTime);
         }
 
-        if (transform.position.y > (GameValues.height/GameValues.heightMeterRatio) + GameValues.maxObjHeightOffset 
-            || transform.position.y < (GameValues.height / GameValues.heightMeterRatio) - GameValues.maxObjHeightOffset)
+        if (transform.position.y > (GameObject.FindGameObjectWithTag("Player").transform.position.y) + GameValues.maxObjHeightOffset 
+            || transform.position.y < (GameObject.FindGameObjectWithTag("Player").transform.position.y) - GameValues.maxObjHeightOffset)
 
         {
             //Debug.Log("Deleted Object: " + gameObject.name);
-            Debug.Log((GameValues.height / GameValues.heightMeterRatio) + GameValues.maxObjHeightOffset);
+            //Debug.Log((GameValues.height / GameValues.heightMeterRatio) + GameValues.maxObjHeightOffset);
 
             Destroy(gameObject);
         }

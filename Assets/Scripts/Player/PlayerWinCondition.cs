@@ -24,7 +24,7 @@ public class PlayerWinCondition : MonoBehaviour
             // Lose
             Lose(GameValues.height);
         }
-        else if (transform.position.y <= (-GameValues.MaxHeight * GameValues.heightMeterRatio))
+        else if (transform.position.y <= (-GameValues.MaxHeight / GameValues.heightMeterRatio))
         {
             // win
             Win();
