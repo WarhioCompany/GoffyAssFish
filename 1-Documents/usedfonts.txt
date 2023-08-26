@@ -1,0 +1,3 @@
+used_fonts:
+* Alta (primarily for ui_mainmenu)
+* Staaliches (Level Display)
