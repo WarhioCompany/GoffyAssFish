@@ -28,6 +28,8 @@ public class SHITSpikeManager : MonoBehaviour
     //public GameObject follow;
 
     public bool canShoot;
+
+    private bool playedPullSound;
  
 
     public enum SpikeManagerState
@@ -119,10 +121,12 @@ public class SHITSpikeManager : MonoBehaviour
     }
     public void Shoot()
     {
+        playedPullSound = false;
         if (!canShoot) return;
         if (state == SpikeManagerState.Prepare)
         {
             state = SpikeManagerState.Shoot;
+            GetComponent<PlayerAudioScript>().ShootSpike();
             GetComponent<Animator>().SetBool("grab", true);
         }
     }
@@ -130,6 +134,8 @@ public class SHITSpikeManager : MonoBehaviour
     public void Push(Collider obj, SHITSpikeScipt spike)
     {
         Debug.Log("Pushing!");
+        GetComponent<PlayerAudioScript>().Push();
+
         transform.parent = null;
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<Rigidbody>().AddForce((transform.position - spike.GetTipPosition()).normalized * pushForce, ForceMode.Impulse);
@@ -174,6 +180,12 @@ public class SHITSpikeManager : MonoBehaviour
 
         if (attachedSpike != null)
         {
+            if (!playedPullSound)
+            {
+                playedPullSound = true;
+                GetComponent<PlayerAudioScript>().Pull();
+            }
+
             GetComponent<Rigidbody>().isKinematic = true;
         }
         else
