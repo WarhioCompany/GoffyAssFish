@@ -47,7 +47,7 @@ public class AtkBomb : MonoBehaviour
             {
                 obj.transform.parent = null;
                 obj.GetComponent<SHITSpikeManager>().lastObj = null;
-                obj.GetComponent<Rigidbody>().isKinematic = false;
+                obj.GetComponent<SHITSpikeManager>().attachedSpike = null;
                 continue;
             }
 

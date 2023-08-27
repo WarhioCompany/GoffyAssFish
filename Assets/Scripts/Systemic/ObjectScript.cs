@@ -56,7 +56,7 @@ public class ObjectScript : MonoBehaviour
         // movement
         if (rb.velocity.magnitude <= mass * gravity)
         {
-            rb.AddForce(Vector3.down * mass * gravity * Time.deltaTime);
+            rb.AddForce(Vector3.down * mass * (transform.position.y > GameObject.FindGameObjectWithTag("Player").transform.position.y && !isPlayerAttached ? gravity * 2 : gravity) * Time.deltaTime);
         }
 
         if (isPlayerAttached)
