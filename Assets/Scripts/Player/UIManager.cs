@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("Stats")]
     [SerializeField] public Slider ExperienceSlider;
     [SerializeField] public TMP_Text levelDisplay;
+    [SerializeField] public GameObject EscMenu;
 
     [Header("Settings")]
     [SerializeField] private float UISpeed = 0.3f;
@@ -70,6 +71,11 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         Destroy(GameObject.FindWithTag("AudioManager"));
+    }
+
+    public void ToggleEscMenu()
+    {
+        EscMenu.SetActive(!EscMenu.activeSelf);
     }
 
     public void Update(){
