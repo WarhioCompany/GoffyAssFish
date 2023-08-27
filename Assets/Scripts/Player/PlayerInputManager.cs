@@ -29,6 +29,7 @@ public class KeyInputScript : MonoBehaviour
         //playerInput.Player.interact.performed += Interact_performed;
         playerInput.Player.Shoot.started += Shoot;
         playerInput.Player.Shoot.canceled += Shoot;
+        playerInput.Player.ESCMenu.performed += EscMenu;
     }
 
     private void Shoot(InputAction.CallbackContext ctx)
@@ -42,6 +43,14 @@ public class KeyInputScript : MonoBehaviour
         {
             // shoot tentacle
             GetComponent<SHITSpikeManager>().Shoot();
+        }
+    }
+
+    private void EscMenu(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            GetComponent<UIManager>().ToggleEscMenu();
         }
     }
 }
