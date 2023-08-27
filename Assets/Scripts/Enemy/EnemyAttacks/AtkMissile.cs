@@ -30,6 +30,7 @@ public class AtkMissile : MonoBehaviour
             other.transform.parent = null;
             other.GetComponent<SHITSpikeManager>().lastObj = null;
             other.GetComponent<SHITSpikeManager>().attachedSpike = null;
+            other.GetComponent<SHITSpikeManager>().state = SHITSpikeManager.SpikeManagerState.None;
         }
 
         Collider[] objs = Physics.OverlapSphere(transform.position, explosionRadius);

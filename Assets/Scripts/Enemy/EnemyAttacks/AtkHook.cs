@@ -21,6 +21,7 @@ public class AtkHook : MonoBehaviour
             other.transform.parent = null;
             other.GetComponent<SHITSpikeManager>().lastObj = null;
             other.GetComponent<SHITSpikeManager>().attachedSpike = null;
+            other.GetComponent<SHITSpikeManager>().state = SHITSpikeManager.SpikeManagerState.None;
             other.GetComponent <Rigidbody>().AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
         }
     }
