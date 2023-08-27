@@ -70,7 +70,7 @@ public class BubbleSpawner : MonoBehaviour
         bubbleHolder.transform.position = GetBubblePos(XRange);
         bubbleHolder.transform.localScale = GetRandomScale(ScaleRange);
 
-        Bubble bubble = bubbleHolder.AddComponent<Bubble>();
+        Bubble bubble = bubbleHolder.GetComponent<Bubble>();
         bubble.Speed = BubbleSpeed;
         bubble.Key = KeyGenerator.Generate(BubbleKeyLength);
 

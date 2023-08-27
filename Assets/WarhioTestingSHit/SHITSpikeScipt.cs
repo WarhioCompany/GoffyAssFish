@@ -162,26 +162,31 @@ public class SHITSpikeScipt : MonoBehaviour
         }
         else if (state == SpikeState.Hit && manager.attachedSpike == this)
         {
-            Vector2 contactPosition = getContactPosition(hitCollider);
-            targetLocalY = CalculateLocalYByContactPoint(contactPosition);
+            if(hitCollider != null)
+            {
+                Vector2 contactPosition = getContactPosition(hitCollider);
+                targetLocalY = CalculateLocalYByContactPoint(contactPosition);
 
-            //Debug.Log("X1");
-            target = TargetAngleFix(contactPosition);
-            if (_hitWait <= 0)
-            {
-                Vector2 dif = Vector3.Normalize(transform.parent.position - (Vector3)contactPosition) * manager.attachRadius;
-                transform.parent.position = Vector3.Lerp(transform.parent.position, contactPosition + dif, manager.playerPullSpeed * Time.deltaTime);
-                if (Vector3.Distance(transform.parent.position, contactPosition + dif) < .3)
+                //Debug.Log("X1");
+                target = TargetAngleFix(contactPosition);
+                if (_hitWait <= 0)
                 {
-                    state = SpikeState.Attached;
-                    transform.parent.SetParent(hitCollider.transform);
-                    manager.state = SHITSpikeManager.SpikeManagerState.None;
+                    Vector2 dif = Vector3.Normalize(transform.parent.position - (Vector3)contactPosition) * manager.attachRadius;
+                    transform.parent.position = Vector3.Lerp(transform.parent.position, contactPosition + dif, manager.playerPullSpeed * Time.deltaTime);
+                    if (Vector3.Distance(transform.parent.position, contactPosition + dif) < .3)
+                    {
+                        state = SpikeState.Attached;
+                        transform.parent.SetParent(hitCollider.transform);
+                        manager.state = SHITSpikeManager.SpikeManagerState.None;
+                    }
                 }
+                else
+                {
+                    _hitWait -= Time.deltaTime;
+                }
+
             }
-            else
-            {
-                _hitWait -= Time.deltaTime;
-            }
+
         }
         else if (state == SpikeState.Attached)
         {

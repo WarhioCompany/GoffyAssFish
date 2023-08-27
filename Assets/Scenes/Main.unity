@@ -867,8 +867,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedUpgradeRatio: 1.2
   WeightEnduranceUpgradeRatio: 1
-  MinGainExp: 10
-  MaxGainExp: 20
+  MinGainExp: 50
+  MaxGainExp: 90
 --- !u!114 &61461001
 MonoBehaviour:
   m_ObjectHideFlags: 0
