@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
     // ~ For Exit Button (UnityEvent)
 
     public void ExitGame() {
+
         //try
         //{
         //    EditorApplication.ExitPlaymode();

@@ -16,11 +16,19 @@ namespace LevelSystem
         // Constants (read-only)
         private const int MaxLevel = 10;
 
+        // Static Constructor
+        public static LevelManager Instance;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void LevelUp(){
             PlayerStats.Instance.OnLevelUp();
         }
 
-        private void GainExp()
+        public void GainExp()
         {
             float exp = Random.Range(MinGainExp, MaxGainExp);
             PlayerStats.Instance.ExperiencePoints += exp;

@@ -92,7 +92,6 @@ public class BubbleSpawner : MonoBehaviour
     public void Despawn(string key) {
         Bubble bubbleToDespawn = CurrentBubbles.Where(y => y.Key == key).First();
         CurrentBubbles.Remove(bubbleToDespawn);
-        Destroy(bubbleToDespawn.gameObject);    
     }
 
     public void Update()
