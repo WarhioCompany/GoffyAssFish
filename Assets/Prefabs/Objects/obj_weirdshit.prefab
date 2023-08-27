@@ -106,7 +106,7 @@ MonoBehaviour:
   mass: 0
   gravity: 100
   baseMass: 1.1
-  massMultiplier: 15
+  massMultiplier: 17
   isPlayerAttached: 0
   isWeapon: 0
   minScale: 0.7
