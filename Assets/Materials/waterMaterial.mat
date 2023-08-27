@@ -29,7 +29,11 @@ Material:
     - _FoamScale: 2000
     - _FoamSpeed: 0.05
     - _QueueControl: 0
+<<<<<<< HEAD
     - _alpha: 0.6394593
+=======
+    - _alpha: 0.50557405
+>>>>>>> e2c84e541bb3080b4f6fcc0284f37c5e54e1814c
     - _foamAmount: 4
     - _slimness: 1.5
     - _waveHeight: 2
