@@ -127,6 +127,8 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         if (state != SpikeState.Shoot) return;
 
+        _hitWait = hitWait;
+
         if (hit.gameObject == manager.lastObj)
         {
             manager.Push(hit, this);
