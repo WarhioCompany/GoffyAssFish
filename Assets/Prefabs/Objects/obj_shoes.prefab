@@ -105,9 +105,10 @@ MonoBehaviour:
   disolveTime: 30
   mass: 0
   gravity: 100
-  baseMass: 1.5
-  massMultiplier: 5
+  baseMass: 1
+  massMultiplier: 10
   isPlayerAttached: 0
+  isWeapon: 0
   minScale: 0.7
   maxScale: 2
 --- !u!54 &8495751087617546971

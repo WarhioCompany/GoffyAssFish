@@ -20,7 +20,7 @@ public class AtkHook : MonoBehaviour
             Debug.Log("HitByHook");
             other.transform.parent = null;
             other.GetComponent<SHITSpikeManager>().lastObj = null;
-            other.GetComponent<Rigidbody>().isKinematic = false;
+            other.GetComponent<SHITSpikeManager>().attachedSpike = null;
             other.GetComponent <Rigidbody>().AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
         }
     }

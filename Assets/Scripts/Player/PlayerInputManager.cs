@@ -50,7 +50,7 @@ public class KeyInputScript : MonoBehaviour
     {
         if (ctx.performed)
         {
-            GetComponent<UIManager>().ToggleEscMenu();
+            GetComponentInChildren<UIManager>().ToggleEscMenu();
         }
     }
 }

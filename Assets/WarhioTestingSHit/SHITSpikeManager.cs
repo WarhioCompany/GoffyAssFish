@@ -140,6 +140,7 @@ public class SHITSpikeManager : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<Rigidbody>().AddForce((transform.position - spike.GetTipPosition()).normalized * pushForce, ForceMode.Impulse);
         obj.GetComponent<Rigidbody>().AddForce(2f * pushForce * (spike.GetTipPosition() - transform.position).normalized, ForceMode.Impulse);
+        obj.GetComponent<ObjectScript>().isWeapon = true;
     }
 
     // Update is called once per frame

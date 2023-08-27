@@ -14,6 +14,7 @@ public class ObjectScript : MonoBehaviour
     public float massMultiplier;
 
     public bool isPlayerAttached;
+    public bool isWeapon;
 
     private Vector3 orgScale;
     private bool destroyed;
@@ -22,6 +23,14 @@ public class ObjectScript : MonoBehaviour
     [Header("Randomization Settings")]
     public float minScale;
     public float maxScale;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<EnemyMovement>())
+        {
+            other.GetComponent<EnemyMovement>().concussedTimer = 1;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +80,14 @@ public class ObjectScript : MonoBehaviour
                 destroyed = true;
             }
 
+            if (GetComponentInChildren<SHITSpikeManager>())
+            {
+                GetComponentInChildren<SHITSpikeManager>().gameObject.transform.parent = null;
+                GetComponentInChildren<SHITSpikeManager>().attachedSpike = null;
+            }
+
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, dissolveSpeed * Time.deltaTime);
+            Destroy(gameObject, 2);
         }
 
         if (transform.position.y > (GameObject.FindGameObjectWithTag("Player").transform.position.y) + GameValues.maxObjHeightOffset 
