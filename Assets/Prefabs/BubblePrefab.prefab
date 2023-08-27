@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5260621305662003588}
   - component: {fileID: 4429176597914985106}
   - component: {fileID: 8371793637058417010}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BubblePrefab
   m_TagString: Bubble
   m_Icon: {fileID: 0}
