@@ -8,7 +8,10 @@ public class PlayerAudioScript : MonoBehaviour
 
     public void ShootSpike()
     {
-        source.PlayOneShot(SoundManager.instance.getClip("spike_shot"));
+        if (Time.timeScale > 0)
+        {
+            source.PlayOneShot(SoundManager.instance.getClip("spike_shot"));
+        }
     }
     //public void HitSpike()
     //{
@@ -16,10 +19,12 @@ public class PlayerAudioScript : MonoBehaviour
     //}
     public void Pull()
     {
-        source.PlayOneShot(SoundManager.instance.getClip("spike_pull"));
+        if (Time.timeScale > 0)
+            source.PlayOneShot(SoundManager.instance.getClip("spike_pull"));
     }
     public void Push()
     {
-        source.PlayOneShot(SoundManager.instance.getClip("spike_push"));
+        if (Time.timeScale > 0)
+            source.PlayOneShot(SoundManager.instance.getClip("spike_push"));
     }
 }

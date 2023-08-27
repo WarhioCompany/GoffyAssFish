@@ -4,6 +4,7 @@ using LevelSystem;
 using TMPro;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float UISpeed = 0.3f;
 
+    public AudioMixer mixer;
     public Animator uiAnim;
 
     // Static constructor
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        EscMenu.SetActive(false);
         SetSlider(ExperienceSlider, 0, PlayerStats.Instance.MinExpValue, PlayerStats.Instance.MaxExpValue);
     }
 
@@ -76,6 +79,21 @@ public class UIManager : MonoBehaviour
     public void ToggleEscMenu()
     {
         EscMenu.SetActive(!EscMenu.activeSelf);
+    }
+    public void setMasterVolume(Slider _slider)
+    {
+        mixer.SetFloat("masterVolume", _slider.value);
+    }
+
+    public void setMusicVolume(Slider _slider)
+    {
+        mixer.SetFloat("musicVolume", _slider.value);
+
+    }
+
+    public void setSoundEffectsVolume(Slider _slider)
+    {
+        mixer.SetFloat("soundFXVolume", _slider.value);
     }
 
     public void Update(){
