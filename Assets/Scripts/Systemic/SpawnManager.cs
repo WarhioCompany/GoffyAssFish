@@ -35,7 +35,7 @@ public class SpawnManager : MonoBehaviour
 
     private float GetRandomXPos(float xRange)
     {
-        return Random.Range(-xRange, xRange);
+        return Random.Range(-10, xRange);
     }
 
     private float GetRandomZRotation(float range)
@@ -46,6 +46,15 @@ public class SpawnManager : MonoBehaviour
     private void Spawn()
     {
         GameObject prefab = GetRandomPrefab(Objects);
+        if (prefab != null)
+        {
+            GameObject _object = Instantiate(prefab);
+
+            ObjectScript spawned = _object.GetComponent<ObjectScript>();
+            _object.transform.position = new Vector3(GetRandomXPos(xOffset), h_spawnHeight.position.y);
+            _object.transform.eulerAngles += new Vector3(0, 0, GetRandomZRotation(RotationRange));
+        }
+
         if (prefab != null)
         {
             GameObject _object = Instantiate(prefab);
