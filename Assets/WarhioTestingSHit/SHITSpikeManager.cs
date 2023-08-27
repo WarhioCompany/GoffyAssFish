@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class SHITSpikeManager : MonoBehaviour
     public SHITSpikeScipt closestSpike;
     public SHITSpikeScipt attachedSpike;
     public GameObject lastObj;
+    public Coroutine reset;
     public float pushForce;
 
     public Camera cam;
@@ -133,8 +135,12 @@ public class SHITSpikeManager : MonoBehaviour
 
     public void Push(Collider obj, SHITSpikeScipt spike)
     {
+        if (lastObj != null) return;
+
         Debug.Log("Pushing!");
         GetComponent<PlayerAudioScript>().Push();
+
+        StartCoroutine(resetLastObj());
 
         transform.parent = null;
         GetComponent<Rigidbody>().isKinematic = false;
@@ -143,11 +149,26 @@ public class SHITSpikeManager : MonoBehaviour
         obj.GetComponent<ObjectScript>().isWeapon = true;
     }
 
+    IEnumerator resetLastObj()
+    {
+        yield return new WaitForSeconds(1);
+        lastObj = null;
+    }
+
     // Update is called once per frame
     void Update()
     {
         transform.rotation = Quaternion.identity;
         //follow.transform.position = getMousePos();
+
+        //if (lastObjResetTimer > 0)
+        //{
+        //    lastObjResetTimer -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    lastObj = null;
+        //}
 
         if (state == SpikeManagerState.Prepare)
         {
