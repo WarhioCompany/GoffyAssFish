@@ -136,6 +136,8 @@ public class SHITSpikeManager : MonoBehaviour
         Debug.Log("Pushing!");
         GetComponent<PlayerAudioScript>().Push();
 
+        lastObj = null;
+
         transform.parent = null;
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<Rigidbody>().AddForce((transform.position - spike.GetTipPosition()).normalized * pushForce, ForceMode.Impulse);

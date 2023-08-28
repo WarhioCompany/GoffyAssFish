@@ -31,7 +31,7 @@ public class SHITSpikeScipt : MonoBehaviour
 
     //public GameObject follow;
 
-    Collider hitCollider;
+    public Collider hitCollider;
 
     Vector3 target;
     public Transform initialTipPosition;
@@ -71,9 +71,9 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         //follow = Instantiate(follow);
 
-        marker = Instantiate(new GameObject());
-        marker.AddComponent<SpriteRenderer>().sprite = sprite;
-        marker.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        //marker = Instantiate(new GameObject());
+        //marker.AddComponent<SpriteRenderer>().sprite = sprite;
+        //marker.GetComponent<SpriteRenderer>().sortingOrder = 2;
 
 
         initialTipPosition.position = GetTipPosition();
@@ -116,7 +116,7 @@ public class SHITSpikeScipt : MonoBehaviour
     }
     Vector2 getContactPosition (Collider collision)
     {
-        marker.transform.position = collision.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
+        //marker.transform.position = collision.ClosestPoint(transform.position);
         return collision.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
     }
     float CalculateLocalYByContactPoint(Vector2 contactPoint)
@@ -127,7 +127,7 @@ public class SHITSpikeScipt : MonoBehaviour
     {
         if (state != SpikeState.Shoot) return;
 
-        _hitWait = hitWait;
+        Debug.Log("Spike Hit: " + hit.gameObject.name + " | lastObj = " + manager.lastObj);
 
         if (hit.gameObject == manager.lastObj)
         {
@@ -135,7 +135,6 @@ public class SHITSpikeScipt : MonoBehaviour
             return;
         }
 
-        print("hit confirmed");
         hitCollider = hit;
         state = SpikeState.Hit;
         manager.attachedSpike = this;
@@ -153,7 +152,7 @@ public class SHITSpikeScipt : MonoBehaviour
             //Debug.Log("O");
             target = TargetAngleFix(manager.getMousePos()); 
         }
-        else if (state == SpikeState.Shoot)
+        else if (state == SpikeState.Shoot && manager.closestSpike == this)
         {
 
             if (Vector3.Distance(transform.position, GetTipPosition()) > shootingRange)
@@ -192,6 +191,10 @@ public class SHITSpikeScipt : MonoBehaviour
         }
         else if (state == SpikeState.Attached)
         {
+            if (hitCollider == null)
+            {
+                Retrieve();
+            }
             Vector2 contactPosition = getContactPosition(hitCollider);
             targetLocalY = CalculateLocalYByContactPoint(contactPosition);
 
